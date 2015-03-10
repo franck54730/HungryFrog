@@ -60,20 +60,26 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		frog.updateTemplate();
 		frog.updateHitboxs();
 		batch.draw(frog.getTexture(), frog.getX(), frog.getY());
-		Fly fly = level.getFly();
-		fly.update(delta);
-		fly.updateTemplate();
-		fly.updateHitboxs();
-		if(frog.hasCollision(fly)){
-			System.out.println("collision");
+		if(!level.isFlyEaten()){
+			Fly fly = level.getFly();
+			fly.update(delta);
+			fly.updateTemplate();
+			fly.updateHitboxs();
+			if(frog.hasCollision(fly)){
+				System.out.println("collision");
+				level.eatFly();
+			}
+			batch.draw(fly.getTexture(), fly.getX(), fly.getY());
 		}
-		batch.draw(fly.getTexture(), fly.getX(), fly.getY());
 		for(Car c : level){
 			c.update(delta);
 			c.updateTemplate();
 			c.updateHitboxs();
 			if(frog.hasCollision(c)){
 				System.out.println("collision v");
+				level.hitCar();
+				frog.updateHitboxs();
+				batch.draw(frog.getTexture(), frog.getX(), frog.getY());
 			}
 			batch.draw(c.getTexture(), c.getX(), c.getY());
 		}

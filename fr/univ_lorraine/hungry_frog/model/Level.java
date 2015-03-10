@@ -10,6 +10,7 @@ import fr.univ_lorraine.hungry_frog.model.bloc.BlocLine;
 import fr.univ_lorraine.hungry_frog.model.bloc.BlocRoad;
 import fr.univ_lorraine.hungry_frog.model.bloc.BlocTree;
 import fr.univ_lorraine.hungry_frog.model.car.Car;
+import fr.univ_lorraine.hungry_frog.model.car.CarBlue;
 import fr.univ_lorraine.hungry_frog.model.car.CarRed;
 import fr.univ_lorraine.hungry_frog.model.car.CarYellow;
 
@@ -20,13 +21,18 @@ public class Level implements Iterable<Car> {
 	protected ArrayList<Car> route;
 	protected Frog frog;
 	protected Fly fly;
+	protected boolean flyEaten = false;
 	public Level(){
 		background = new ArrayList<Bloc>();
 		route = new ArrayList<Car>();
 		frog = new Frog();
 		fly = new Fly();
-		route.add(new CarRed(200, Constantes.ROAD1, DIRECTION.LEFT, 700));
-		//route.add(new CarYellow(400, Constantes.ROAD2, DIRECTION.LEFT, 700));
+		route.add(new CarRed(200, Constantes.ROAD1, DIRECTION.LEFT, 500));
+		route.add(new CarRed(500, Constantes.ROAD1, DIRECTION.LEFT, 500));
+		route.add(new CarYellow(400, Constantes.ROAD2, DIRECTION.LEFT, 500));
+		route.add(new CarYellow(200, Constantes.ROAD3, DIRECTION.RIGHT, 500));
+		route.add(new CarYellow(400, Constantes.ROAD3, DIRECTION.RIGHT, 500));
+		route.add(new CarBlue(500, Constantes.ROAD4, DIRECTION.RIGHT, 500));
 		/*
 		for(int height = 0; height < Constantes.LEVEL_NB_BLOC_HEIGHT; height++){
 			for(int width = 0; width < Constantes.LEVEL_NB_BLOC_WIDTH; width++){
@@ -88,5 +94,18 @@ public class Level implements Iterable<Car> {
 	
 	public int getNbInput(){
 		return nbInput;
+	}
+	
+	public void eatFly(){
+		flyEaten = true;
+	}
+	
+	public boolean isFlyEaten(){
+		return flyEaten;
+	}
+	
+	public void hitCar(){
+		frog.setX(Constantes.POS_X_START_FROG);
+		frog.setY(Constantes.POS_Y_START_FROG);
 	}
 }

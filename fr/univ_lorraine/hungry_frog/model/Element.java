@@ -55,8 +55,6 @@ public abstract class Element {
 	public abstract Hitbox getHitbox();
 	
 	public boolean hasCollision(Element e){
-		if(e.getClass() == Fly.class)
-			System.out.println("fly : " + e.getHitbox() + "  frog : " + this.getHitbox());
 		return e.getHitbox().hasCollision(this.getHitbox());
 	}
 }

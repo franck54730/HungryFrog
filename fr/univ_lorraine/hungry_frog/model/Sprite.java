@@ -11,11 +11,11 @@ public abstract class Sprite extends Element {
 
 	protected String lastDirection;
 	protected Texture texture;	
-	protected Constantes.DIRECTION direction = Constantes.DIRECTION.LEFT;
+	protected Constantes.DIRECTION direction = Constantes.DIRECTION.STOP;
 	protected int position;
 	protected int tempo = 0;
 	protected int tempoMax;
-	protected int speed = Constantes.VITESSE_RAPIDE;
+	protected int speed;
 	protected Texture[][] animation;
 	protected int maxPosition;
 	

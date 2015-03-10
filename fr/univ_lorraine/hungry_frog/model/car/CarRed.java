@@ -11,7 +11,7 @@ public class CarRed extends Car {
 	
 	public CarRed(int x, int y, DIRECTION d, int xD) {
 		super(x, y, d, xD);
-		speed = Constantes.VITESSE_RAPIDE;
+		speed = Constantes.VITESSE_NORMAL;
 		hitbox = new Hitbox[2][2];
 		hitbox[0][0] = new Hitbox(x, y, 93, 49, 3, 16 );
 		hitbox[0][1] = new Hitbox(x, y, 93, 49, 3, 16 );

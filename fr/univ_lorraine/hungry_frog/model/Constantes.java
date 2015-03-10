@@ -10,12 +10,13 @@ public class Constantes {
 	public static final String TEXTURE_FLY = "fly";
 	public static final String TEXTURE_CAR_RED = "car_red";
 	public static final String TEXTURE_CAR_YELLOW = "car_yellow";
+	public static final String TEXTURE_CAR_BLUE = "car_blue";
 	
 	public static final int BLOC_DIMENSION = 50;
 	
 	//nombre de frame avant changement de texture
-	public static final int TEMPO_FROG = 11;
-	public static final int TEMPO_CAR = 5;
+	public static final int TEMPO_FROG = 9;
+	public static final int TEMPO_CAR = 2;
 	public static final int TEMPO_FLY = 8;
 	
 	//represente le fond
@@ -74,8 +75,8 @@ public class Constantes {
 	}
 
 	public static final int VITESSE_TRES_LENT = 5;
-	public static final int VITESSE_LENT = 10;
-	public static final int VITESSE_NORMAL = 30;
-	public static final int VITESSE_RAPIDE = 40;
-	public static final int VITESSE_TRES_RAPIDE = 60;
+	public static final int VITESSE_LENT = 20;
+	public static final int VITESSE_NORMAL = 40;
+	public static final int VITESSE_RAPIDE = 60;
+	public static final int VITESSE_TRES_RAPIDE = 80;
 }

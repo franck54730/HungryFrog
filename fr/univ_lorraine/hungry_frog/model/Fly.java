@@ -16,19 +16,20 @@ public class Fly extends Sprite {
 	public Fly() {
 		super(50, 50, Constantes.POS_X_START_FLY, Constantes.POS_Y_START_FLY);
 		tempoMax = Constantes.TEMPO_FLY;
+		speed = Constantes.VITESSE_NORMAL;
 		hitbox = new Hitbox[4][3];
 		hitbox[0][0] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[0][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[0][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[1][0] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[1][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[1][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[2][0] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[2][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[2][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[3][0] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[3][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
-		hitbox[3][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 11, 8, 21 );
+		hitbox[0][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 9, 17, 20 );
+		hitbox[0][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 9, 17, 18 );
+		hitbox[1][0] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 11, 11, 18, 21);
+		hitbox[1][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 10, 9, 22, 20 );
+		hitbox[1][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 11, 9, 21, 18 );
+		hitbox[2][0] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 15, 9, 16, 21 );
+		hitbox[2][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 15, 10, 4, 14 );
+		hitbox[2][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 15, 9, 16, 21 );
+		hitbox[3][0] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 15, 9, 16, 21 );
+		hitbox[3][1] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 15, 9, 16, 23 );
+		hitbox[3][2] = new Hitbox(Constantes.POS_X_START_FLY,Constantes.POS_Y_START_FLY, 15, 10, 16, 21);
 		rand = new Random();
 		randomTempo = rand.nextInt(10);
 		lastDirection = "right";
@@ -70,8 +71,7 @@ public class Fly extends Sprite {
 					break;
 			}
 		}
-		direction = DIRECTION.STOP;
-		texture = animation[Constantes.getDirectionInt(direction)][position];
+		texture = animation[Constantes.getDirectionInt(direction)][position-1];
 	}
 
 	@Override
@@ -89,5 +89,19 @@ public class Fly extends Sprite {
 		animation[3][0] = new Texture(Constantes.TEXTURE_FLY+"_down_1.png");
 		animation[3][1] = new Texture(Constantes.TEXTURE_FLY+"_down_2.png");
 		animation[3][2] = new Texture(Constantes.TEXTURE_FLY+"_down_3.png");
+	}
+	
+	
+	@Override
+	public void update(float delta){
+		super.update(delta);
+		if(x < 0)
+			x = 0;
+		else if( x > 450)
+			x = 500-50;
+		if(y < 0)
+			y = 0;
+		else if( y > 450)
+			y = 500-50;
 	}
 }
