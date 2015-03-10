@@ -1,6 +1,9 @@
 package fr.univ_lorraine.hungry_frog.model;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 
 import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 
@@ -13,7 +16,9 @@ public abstract class Sprite extends Element {
 	protected int tempo = 0;
 	protected int tempoMax;
 	protected int speed = Constantes.VITESSE_RAPIDE;
-
+	protected Texture[][] animation;
+	protected int maxPosition;
+	
 	public Texture getTexture() {
 		return texture;
 	}
@@ -24,11 +29,12 @@ public abstract class Sprite extends Element {
 	
 	public Sprite(int h, int w, int cx, int cy){
 		super(h, w, cx, cy);
+		initTexture();
 		position = 1;
-		texture = new Texture(getTextureName());
+		maxPosition = 3;
 	}
 	
-
+	protected abstract void initTexture();
 
 	public void setDirection(Constantes.DIRECTION d){
 		direction = d;
@@ -47,10 +53,6 @@ public abstract class Sprite extends Element {
 	}
 
 	public void update(float delta){
-		if(x == 0){
-			System.out.println("arrivé");
-		}
-		
 		//if(translate)
 		int last; 
 		switch(direction){
@@ -82,7 +84,6 @@ public abstract class Sprite extends Element {
 		}else{
 			move();
 		}
-		hitbox.setPosition(x+decalageX, y+decalageY);
 	}
 	
 	public void stopMove(){
@@ -93,7 +94,7 @@ public abstract class Sprite extends Element {
 		if(tempo < tempoMax){
 			tempo++;
 		}else{
-			if(position < 3)
+			if(position < maxPosition)
 				position++;
 			else 
 				position = 1;
@@ -101,6 +102,20 @@ public abstract class Sprite extends Element {
 		}
 	}
 	
-	public abstract void updateTemplate();
-	protected abstract String getTextureName();
+	public void updateHitboxs(){
+		for(int i = 0; i < hitbox.length;i++){
+			for(int j = 0; j < hitbox[i].length; j++){
+				hitbox[i][j].setX(x);
+				hitbox[i][j].setY(y);
+			}
+		}
+	}
+	
+	public Hitbox getHitbox(){
+		return hitbox[Constantes.getDirectionInt(direction)][position-1];
+	}
+
+	public void updateTemplate() {
+		texture = animation[Constantes.getDirectionInt(direction)][position-1];
+	}
 }

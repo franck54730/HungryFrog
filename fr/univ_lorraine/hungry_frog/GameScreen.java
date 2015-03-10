@@ -35,11 +35,11 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		level = new Level();
 		batch = new SpriteBatch();
 
-	      camera = new OrthographicCamera();
-	      viewport = new FitViewport(100,100,camera);
-	      viewport.apply();
+		camera = new OrthographicCamera();
+		viewport = new FitViewport(100,100,camera);
+		viewport.apply();
 
-	      camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		Gdx.input.setInputProcessor(new GameListener(level));
 	}
 	
@@ -50,7 +50,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 	@Override
 	public void render(float delta) {
-	      camera.update();
+	    camera.update();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
@@ -58,10 +58,12 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		Frog frog = level.getFrog();
 		frog.update(delta);
 		frog.updateTemplate();
+		frog.updateHitboxs();
 		batch.draw(frog.getTexture(), frog.getX(), frog.getY());
 		Fly fly = level.getFly();
 		fly.update(delta);
 		fly.updateTemplate();
+		fly.updateHitboxs();
 		if(frog.hasCollision(fly)){
 			System.out.println("collision");
 		}
@@ -69,9 +71,13 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		for(Car c : level){
 			c.update(delta);
 			c.updateTemplate();
+			c.updateHitboxs();
+			if(frog.hasCollision(c)){
+				System.out.println("collision v");
+			}
 			batch.draw(c.getTexture(), c.getX(), c.getY());
 		}
-		/* boucle pour crée le background a partir du tableau et des bloc
+		/* boucle pour crï¿½e le background a partir du tableau et des bloc
 		for(Bloc b : level){
 			batch.draw(b.getTexture(), b.getX(), b.getY());
 		}*/

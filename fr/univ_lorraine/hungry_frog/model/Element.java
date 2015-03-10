@@ -5,9 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public abstract class Element {
 
-	protected Rectangle hitbox;	
-	protected int decalageX;
-	protected int decalageY;
+	protected Hitbox[][] hitbox;	
 	protected int height;
 	protected int width;
 	protected int x;
@@ -19,6 +17,8 @@ public abstract class Element {
 		x = cx;
 		y = cy;
 	}
+	
+	public abstract void updateHitboxs();
 
 	public int getHeight() {
 		return height;
@@ -52,11 +52,11 @@ public abstract class Element {
 		this.y = y;
 	}
 	
-	public Rectangle getHitbox(){
-		return hitbox;
-	}
+	public abstract Hitbox getHitbox();
 	
 	public boolean hasCollision(Element e){
-		return e.getHitbox().overlaps(hitbox);
+		if(e.getClass() == Fly.class)
+			System.out.println("fly : " + e.getHitbox() + "  frog : " + this.getHitbox());
+		return e.getHitbox().hasCollision(this.getHitbox());
 	}
 }

@@ -13,41 +13,23 @@ public abstract class Car extends Sprite {
 	public Car(int x, int y, DIRECTION d, int xD) {
 		super(100, 100, x, y);
 		tempoMax = Constantes.TEMPO_CAR;
-		hitbox = new Rectangle(x,y, 100,100);
 		lastDirection = "left";
 		direction = d;
 		xDepart = xD;
+		maxPosition = 2;
+		updateTemplate(); 
 	}
 
 	@Override
-	public void updateTemplate() {
-		texture = new Texture(getTextureName());
-	}
-	
-	protected abstract String getTextureName();
-	
-	@Override
 	public void update(float delta){
 		super.update(delta);
-		System.out.println("x : "+x);
 		if(x<-200){
 			x=xDepart;
 		}else if(x>xDepart){
 			x=-200;
 		}
 	}
-
-	@Override
-	public void move(){
-		if(tempo < tempoMax){
-			tempo++;
-		}else{
-			if(position < 2)
-				position++;
-			else 
-				position = 1;
-			tempo = 0;
-		}
-	}
+	
+	protected abstract void initTexture();
 	
 }

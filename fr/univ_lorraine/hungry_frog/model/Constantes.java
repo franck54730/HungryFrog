@@ -60,6 +60,18 @@ public class Constantes {
 		}
 		return rep;
 	}
+	
+	public static int getDirectionInt(DIRECTION d){
+		int rep = 0;
+		switch(d){
+			case LEFT : rep = 0; break;
+			case RIGHT : rep = 1; break;
+			case UP : rep = 2; break;
+			case DOWN : rep = 3; break;
+			case STOP : rep = 3;
+		}
+		return rep;
+	}
 
 	public static final int VITESSE_TRES_LENT = 5;
 	public static final int VITESSE_LENT = 10;
