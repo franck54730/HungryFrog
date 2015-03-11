@@ -70,7 +70,6 @@ public class GameListener implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		System.out.println("touch : (x : "+screenX+" ) (y : "+screenY+" )");
 		pad.setPosition(screenX, screenY);
 		pad.show();
 		return false;
@@ -86,6 +85,8 @@ public class GameListener implements InputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		pad.update(screenX,screenY);
+		level.getFrog().setDirection(pad.getDirection());
 		// TODO Stub de la méthode généré automatiquement
 		return false;
 	}

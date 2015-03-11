@@ -117,10 +117,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);
 
 		if(pad.isShown()){
-			pad.update(Gdx.input.getX(),Gdx.input.getY());
 			pad.updateTemplate();
 			batch.draw(pad.getTexture(), pad.getX(), pad.getY());
-			frog.setDirection(pad.getDirection());
 		}
 		batch.end();
 	}
