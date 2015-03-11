@@ -77,6 +77,39 @@ public class Pad extends Element {
 	
 	public void update(int cx, int cy){
 		//TODO mettre les formules vue en td
+		//System.out.println("cx : "+cx + " cy : "+  cy);
+		int coorX = centerX-cx;
+		coorX = -coorX;
+		int coorY = centerY-cy;
+		//boolean gauche = (18 < coordX && cordX < 50) && () ;
+		System.out.println("coorX : "+coorX + " coorY : "+  coorY);
+		int a = coorY+coorX;
+		int b = coorY-coorX;
+		boolean left = a < 0 && b > 0 && coorX > -50 && coorX < -18;
+		boolean right = a > 0 && b < 0 && coorX > 18 && coorX < 50;
+		boolean up = a > 0 && b > 0 && coorY > 18 && coorY < 50;
+		boolean down = a < 0 && b < 0 && coorY > -50 && coorY < -18;
+		if(left)
+			direction = DIRECTION.LEFT;
+		else if(right)
+			direction = DIRECTION.RIGHT;
+		else if(up)
+			direction = DIRECTION.UP;
+		else if(down) 
+			direction = DIRECTION.DOWN;
+		else 
+			direction = DIRECTION.STOP;
+		System.out.println("dir : "+Constantes.getDirectionString(direction));
+	/*	y+x = a
+				y-x = b
+		xNow = cx;
+		yNow = cy;
+		int y2 = y-centerY; 
+		gauche = (y2+x < 0)&& (y2-x > 0) && (condition encadrement x)
+		droite = (y2+x > 0) && (y2-x < 0) && (condition encadrement x)
+		haut = (y2+x > 0) && (y2-x > 0) && (condition encadrement x)
+		bas = (y2+x < 0) && (y2-x < 0) && (condition encadrement x)
+		*/
 	}
 
 	@Override

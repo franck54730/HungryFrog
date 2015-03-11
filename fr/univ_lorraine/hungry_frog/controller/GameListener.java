@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 
 import fr.univ_lorraine.hungry_frog.model.Constantes;
+import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 import fr.univ_lorraine.hungry_frog.model.Level;
 import fr.univ_lorraine.hungry_frog.model.Pad;
 
@@ -79,6 +80,7 @@ public class GameListener implements InputProcessor {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		// TODO Stub de la méthode généré automatiquement
 		pad.hide();
+		level.getFrog().setDirection(DIRECTION.STOP);
 		return false;
 	}
 
