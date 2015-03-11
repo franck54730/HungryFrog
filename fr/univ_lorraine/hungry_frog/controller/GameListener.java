@@ -7,13 +7,16 @@ import com.badlogic.gdx.InputProcessor;
 
 import fr.univ_lorraine.hungry_frog.model.Constantes;
 import fr.univ_lorraine.hungry_frog.model.Level;
+import fr.univ_lorraine.hungry_frog.model.Pad;
 
 public class GameListener implements InputProcessor {
 
 	protected Level level;
+	protected Pad pad;
 	
-	public GameListener(Level l){
+	public GameListener(Level l, Pad p){
 		level = l;
+		pad = p;
 	}
 
 	public boolean keyUp(int keycode) {
@@ -66,13 +69,16 @@ public class GameListener implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		// TODO Stub de la méthode généré automatiquement
+		System.out.println("touch : (x : "+screenX+" ) (y : "+screenY+" )");
+		pad.setPosition(screenX, screenY);
+		pad.show();
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		// TODO Stub de la méthode généré automatiquement
+		pad.hide();
 		return false;
 	}
 

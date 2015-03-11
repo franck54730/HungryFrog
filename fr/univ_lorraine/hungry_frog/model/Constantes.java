@@ -11,6 +11,7 @@ public class Constantes {
 	public static final String TEXTURE_CAR_RED = "car_red";
 	public static final String TEXTURE_CAR_YELLOW = "car_yellow";
 	public static final String TEXTURE_CAR_BLUE = "car_blue";
+	public static final String TEXTURE_PAD = "pad";
 	public static final String SON_COLLISION_CAR = "collision_car.mp3";
 	public static final String SON_FOND = "fond.mp3";
 	public static final String SON_LIFE = "life.mp3";
@@ -67,6 +68,18 @@ public class Constantes {
 		return rep;
 	}
 	
+	public static String getDirectionString(DIRECTION d) {
+		String rep = null;
+		switch(d){
+			case LEFT : rep = "left"; break;
+			case RIGHT : rep = "right"; break;
+			case UP : rep = "up"; break;
+			case DOWN : rep = "down"; break;
+			case STOP : rep = "center";
+		}
+		return rep;
+	}
+	
 	public static int getDirectionInt(DIRECTION d){
 		int rep = 0;
 		switch(d){
@@ -75,6 +88,18 @@ public class Constantes {
 			case UP : rep = 2; break;
 			case DOWN : rep = 3; break;
 			case STOP : rep = 3;
+		}
+		return rep;
+	}
+	
+	public static int getDirectionIntPad(DIRECTION d){
+		int rep = 0;
+		switch(d){
+			case LEFT : rep = 0; break;
+			case RIGHT : rep = 1; break;
+			case UP : rep = 2; break;
+			case DOWN : rep = 3; break;
+			case STOP : rep = 4;
 		}
 		return rep;
 	}
