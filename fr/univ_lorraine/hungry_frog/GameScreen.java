@@ -6,12 +6,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -28,10 +31,17 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	GameListener listener;
 	SpriteBatch batch;
 	Level level;
+	Sound collisionCar;
+	Sound fond;
+	Sound life;
 	   OrthographicCamera camera;
 	   Viewport viewport;
 	
 	public GameScreen(HungryFrogGame g){
+		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
+		fond.loop(0.2f);
+		collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
+		life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
 		level = new Level();
 		batch = new SpriteBatch();
 
@@ -66,6 +76,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			fly.updateTemplate();
 			fly.updateHitboxs();
 			if(frog.hasCollision(fly)){
+				life.play(0.5f);
 				System.out.println("collision");
 				level.eatFly();
 			}
@@ -76,6 +87,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			c.updateTemplate();
 			c.updateHitboxs();
 			if(frog.hasCollision(c)){
+				collisionCar.play(1f);
 				System.out.println("collision v");
 				level.hitCar();
 				frog.updateHitboxs();

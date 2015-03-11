@@ -11,6 +11,9 @@ public class Constantes {
 	public static final String TEXTURE_CAR_RED = "car_red";
 	public static final String TEXTURE_CAR_YELLOW = "car_yellow";
 	public static final String TEXTURE_CAR_BLUE = "car_blue";
+	public static final String SON_COLLISION_CAR = "collision_car.mp3";
+	public static final String SON_FOND = "fond.mp3";
+	public static final String SON_LIFE = "life.mp3";
 	
 	public static final int BLOC_DIMENSION = 50;
 	
