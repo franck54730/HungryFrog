@@ -52,6 +52,8 @@ public class Constantes {
 	public static final int ROAD3 = 125;
 	public static final int ROAD4 = 45;
 	
+	public static final int NB_LEVEL = 10;
+	
 	public static enum DIRECTION { LEFT, RIGHT, UP, DOWN, STOP };
 	public static String getDirectionString(DIRECTION d, String last) {
 		String rep = null;

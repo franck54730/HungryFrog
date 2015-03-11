@@ -7,10 +7,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Timer;
@@ -29,6 +31,8 @@ import fr.univ_lorraine.hungry_frog.model.car.Car;
 public class GameScreen extends ApplicationAdapter implements Screen{
 
 	GameListener listener;
+    BitmapFont lifeLabel;
+    BitmapFont levelLabel;
 	SpriteBatch batch;
 	Level level;
 	Sound collisionCar;
@@ -44,7 +48,10 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
 		level = new Level();
 		batch = new SpriteBatch();
-
+		lifeLabel = new BitmapFont();
+		lifeLabel.setColor(Color.WHITE);
+		levelLabel = new BitmapFont();
+		levelLabel.setColor(Color.WHITE);
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(100,100,camera);
 		viewport.apply();
@@ -67,38 +74,44 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		batch.draw(new Texture(Constantes.TEXTURE_BACKGROUND),0,0);
 		Frog frog = level.getFrog();
 		frog.update(delta);
-		frog.updateTemplate();
-		frog.updateHitboxs();
-		batch.draw(frog.getTexture(), frog.getX(), frog.getY());
-		if(!level.isFlyEaten()){
-			Fly fly = level.getFly();
-			fly.update(delta);
-			fly.updateTemplate();
-			fly.updateHitboxs();
-			if(frog.hasCollision(fly)){
-				life.play(0.5f);
-				System.out.println("collision");
-				level.eatFly();
+		if(frog.isFinish())
+			level.levelUp();
+		else{
+			frog.updateTemplate();
+			frog.updateHitboxs();
+			batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+			if(!level.isFlyEaten()){
+				Fly fly = level.getFly();
+				fly.update(delta);
+				fly.updateTemplate();
+				fly.updateHitboxs();
+				if(frog.hasCollision(fly)){
+					life.play(0.5f);
+					System.out.println("collision");
+					level.eatFly();
+				}
+				batch.draw(fly.getTexture(), fly.getX(), fly.getY());
 			}
-			batch.draw(fly.getTexture(), fly.getX(), fly.getY());
-		}
-		for(Car c : level){
-			c.update(delta);
-			c.updateTemplate();
-			c.updateHitboxs();
-			if(frog.hasCollision(c)){
-				collisionCar.play(1f);
-				System.out.println("collision v");
-				level.hitCar();
-				frog.updateHitboxs();
-				batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+			for(Car c : level){
+				c.update(delta);
+				c.updateTemplate();
+				c.updateHitboxs();
+				if(frog.hasCollision(c)){
+					collisionCar.play(1f);
+					System.out.println("collision v");
+					level.hitCar();
+					frog.updateHitboxs();
+					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+				}
+				batch.draw(c.getTexture(), c.getX(), c.getY());
 			}
-			batch.draw(c.getTexture(), c.getX(), c.getY());
+			/* boucle pour cr�e le background a partir du tableau et des bloc
+			for(Bloc b : level){
+				batch.draw(b.getTexture(), b.getX(), b.getY());
+			}*/
 		}
-		/* boucle pour cr�e le background a partir du tableau et des bloc
-		for(Bloc b : level){
-			batch.draw(b.getTexture(), b.getX(), b.getY());
-		}*/
+		lifeLabel.draw(batch, "Vie : "+level.getLife(), 10, 490);
+		lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);
 		batch.end();
 	}
 

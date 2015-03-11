@@ -56,4 +56,8 @@ public class Frog extends Sprite {
 		else if( y > 450)
 			y = 500-50;
 	}
+	
+	public boolean isFinish(){
+		return y < 10;
+	}
 }
