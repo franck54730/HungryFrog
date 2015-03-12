@@ -21,7 +21,7 @@ public class HungryFrogGame extends Game {
 	@Override
 	public void render () {
 		super.render();
-		logger.log();
+		//logger.log();
 	}
 }
 

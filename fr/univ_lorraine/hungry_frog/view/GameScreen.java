@@ -39,31 +39,30 @@ public class GameScreen extends ApplicationAdapter implements Screen{
     Pad pad;
 	SpriteBatch batch;
 	Level level;
-	Sound collisionCar;
-	Sound fond;
-	Sound life;
+	//Sound collisionCar;
+	//Sound fond;
+	//Sound life;
 	boolean start = false;
 	   OrthographicCamera camera;
-	   //Viewport viewport;
+	   Viewport viewport;
 	
 	public GameScreen(HungryFrogGame g){
 		hearth = new Texture(Constantes.TEXTURE_HEARTH);
 		game = g;
 		pad = new Pad(100,100,0,0);
-		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
-		collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
-		life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
+		//fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
+		//collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
+		//life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
 		level = new Level();
 		batch = new SpriteBatch();
 		lifeLabel = new BitmapFont();
 		lifeLabel.setColor(Color.WHITE);
 		levelLabel = new BitmapFont();
 		levelLabel.setColor(Color.WHITE);
-		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-		//viewport = new FitViewport(100,100,camera);
-		//viewport.apply();
-		updateCamera();
-		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+		camera = new OrthographicCamera();
+		viewport = new FitViewport(500,500,camera);
+		viewport.apply();
+		camera.position.set(500/2,500/2,0);
 		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 	
@@ -76,7 +75,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	
 	public void start(){
 		start=true;
-		fond.loop(0.2f);
+		//fond.loop(0.2f);
 	}
 	
 	@Override
@@ -88,55 +87,54 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	@Override
 	public void render(float delta) {
 	    camera.update();
+	    batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-			batch.draw(new Texture(Constantes.TEXTURE_BACKGROUND),0,0);
-			Frog frog = level.getFrog();
-			frog.update(delta);
-			if(frog.isFinish())
-				level.levelUp();
-			else{
-				frog.updateTemplate();
-				frog.updateHitboxs();
-				batch.draw(frog.getTexture(), frog.getX(), frog.getY());
-				if(!level.isFlyEaten()){
-					Fly fly = level.getFly();
-					fly.update(delta);
-					fly.updateTemplate();
-					fly.updateHitboxs();
-					if(frog.hasCollision(fly)){
-						life.play(0.5f);
-						System.out.println("collision");
-						level.eatFly();
-					}
-					batch.draw(fly.getTexture(), fly.getX(), fly.getY());
+		batch.draw(new Texture(Constantes.TEXTURE_BACKGROUND),0,0);
+		Frog frog = level.getFrog();
+		frog.update(delta);
+		if(frog.isFinish())
+			level.levelUp();
+		else{
+			frog.updateTemplate();
+			frog.updateHitboxs();
+			batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+			if(!level.isFlyEaten()){
+				Fly fly = level.getFly();
+				fly.update(delta);
+				fly.updateTemplate();
+				fly.updateHitboxs();
+				if(frog.hasCollision(fly)){
+					//life.play(0.5f);
+					level.eatFly();
 				}
-				for(Car c : level){
-					c.update(delta);
-					c.updateTemplate();
-					c.updateHitboxs();
-					if(frog.hasCollision(c)){
-						collisionCar.play(1f);
-						System.out.println("collision v");
-						level.hitCar();
-						frog.updateHitboxs();
-						batch.draw(frog.getTexture(), frog.getX(), frog.getY());
-					}
-					batch.draw(c.getTexture(), c.getX(), c.getY());
+				batch.draw(fly.getTexture(), fly.getX(), fly.getY());
+			}
+			for(Car c : level){
+				c.update(delta);
+				c.updateTemplate();
+				c.updateHitboxs();
+				if(frog.hasCollision(c)){
+					//	collisionCar.play(1f);
+					level.hitCar();
+					frog.updateHitboxs();
+					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
 				}
-				/* boucle pour cr�e le background a partir du tableau et des bloc
-				for(Bloc b : level){
-					batch.draw(b.getTexture(), b.getX(), b.getY());
-				}*/
+				batch.draw(c.getTexture(), c.getX(), c.getY());
 			}
-			batch.draw(hearth, 10, 475);
-			lifeLabel.draw(batch, " : "+level.getLife(), 35, 490);
-			lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);
-	
-			if(pad.isShown()){
-				pad.updateTemplate();
-				batch.draw(pad.getTexture(), pad.getX(), pad.getY());
-			}
+			/* boucle pour cr�e le background a partir du tableau et des bloc
+			for(Bloc b : level){
+				batch.draw(b.getTexture(), b.getX(), b.getY());
+			}*/
+		}
+		batch.draw(hearth, 10, 475);
+		lifeLabel.draw(batch, " : "+level.getLife(), 35, 490);
+		lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);
+
+		if(pad.isShown()){
+			pad.updateTemplate();
+			batch.draw(pad.getTexture(), pad.getX(), pad.getY());
+		}
 		batch.end();
 	}
 
@@ -164,8 +162,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 	   @Override
 	   public void resize(int width, int height){
-	      //viewport.update(width,height);
-	      camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+		      viewport.update(width,height);
+		      camera.position.set(500/2,500/2,0);
 	   }
 	   @Override
 	public void create(){

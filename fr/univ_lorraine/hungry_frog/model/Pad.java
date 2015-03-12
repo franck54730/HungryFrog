@@ -121,10 +121,10 @@ public class Pad extends Element {
 		//boolean gauche = (18 < coordX && cordX < 50) && () ;
 		int a = coorY+coorX;
 		int b = coorY-coorX;
-		boolean left = a < 0 && b > 0 && coorX > -50 && coorX < -18;
-		boolean right = a > 0 && b < 0 && coorX > 18 && coorX < 50;
-		boolean up = a < 0 && b < 0 && coorY > -50 && coorY < -18;
-		boolean down = a > 0 && b > 0 && coorY > 18 && coorY < 50;
+		boolean left = a < 0 && b > 0 && coorX > -70 && coorX < -18;
+		boolean right = a > 0 && b < 0 && coorX > 18 && coorX < 70;
+		boolean up = a < 0 && b < 0 && coorY > -70 && coorY < -18;
+		boolean down = a > 0 && b > 0 && coorY > 18 && coorY < 70;
 		if(left)
 			direction = DIRECTION.LEFT;
 		else if(right)

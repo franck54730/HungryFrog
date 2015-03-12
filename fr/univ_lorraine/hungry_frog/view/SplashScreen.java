@@ -25,24 +25,23 @@ public class SplashScreen extends ScreenAdapter{
 		this.hungryfrog = hungryfrog;
 		batch = new SpriteBatch();
 		img = new Texture(Constantes.TEXTURE_ACCEUIL);
-		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_THEME));
+	//	fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_THEME));
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(100,100,camera);
+		viewport = new FitViewport(500,500,camera);
 		viewport.apply();
-
-		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+		camera.position.set(500/2,500/2,0);
 	}
 
 	
 	public void start(){
 		start=true;
-		fond.loop(0.2f);
+		//fond.loop(0.2f);
 	}
 
 	@Override
 	public void hide() {
 		// TODO Auto-generated method stub
-		fond.pause();
+		//fond.pause();
 	}
 	
 	@Override
@@ -53,32 +52,21 @@ public class SplashScreen extends ScreenAdapter{
 	
 	public void render(float delta){
 	    camera.update();
+	    batch.setProjectionMatrix(camera.combined);
 		if(start){
 			if(Gdx.input.justTouched()){
-				hungryfrog.animscreen.show();
 				hungryfrog.setScreen(hungryfrog.animscreen);
 			}
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			batch.begin();
 			batch.draw(img,0,0);
 			batch.end();
-			updateCamera();
 		}
 	}
 
 	   @Override
 	   public void resize(int width, int height){
-		  hungryfrog.animscreen.resize(width, height);
 	      viewport.update(width,height);
-	      camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
+	      camera.position.set(500/2,500/2,0);
 	   }
-	
-
-		public void updateCamera(){
-			int heigthScreen = Gdx.graphics.getHeight()/2;
-			int widthScreen = Gdx.graphics.getWidth()/2; 
-			//camera.position.set(w,camera.viewportHeight/2,0);
-			//int posX = 1
-			//int posY = 
-		}
 }

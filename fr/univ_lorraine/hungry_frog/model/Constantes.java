@@ -111,7 +111,7 @@ public class Constantes {
 
 	public static final int VITESSE_TRES_LENT = 5;
 	public static final int VITESSE_LENT = 20;
-	public static final int VITESSE_NORMAL = 40;
-	public static final int VITESSE_RAPIDE = 60;
-	public static final int VITESSE_TRES_RAPIDE = 80;
+	public static final int VITESSE_NORMAL = 80;
+	public static final int VITESSE_RAPIDE = 100;
+	public static final int VITESSE_TRES_RAPIDE = 120;
 }

@@ -10,7 +10,7 @@ public class Frog extends Sprite {
 		super(50, 50, Constantes.POS_X_START_FROG, Constantes.POS_Y_START_FROG);
 		tempoMax = Constantes.TEMPO_FROG;
 		lastDirection = "down";
-		speed = Constantes.VITESSE_NORMAL;
+		speed = Constantes.VITESSE_RAPIDE;
 		hitbox = new Hitbox[4][3];
 		hitbox[0][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 35, 26, 9, 2);
 		hitbox[0][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 37, 34, 6, 2);
