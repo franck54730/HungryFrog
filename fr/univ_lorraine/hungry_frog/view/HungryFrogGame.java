@@ -13,23 +13,15 @@ public class HungryFrogGame extends Game {
 	public void create () {
 		logger = new FPSLogger();
 		animscreen = new GameScreen(this);	
-		//splashscreen = new SplashScreen(this);
-		setGameScreen();
-		//setScreen(animscreen);	
+		splashscreen = new SplashScreen(this);
+		//setGameScreen();
+		setScreen(splashscreen);	
 	}
 	
 	@Override
 	public void render () {
 		super.render();
 		logger.log();
-	}
-	
-	public void setSplashScreen(){
-		setScreen(splashscreen);
-	}
-		
-	public void setGameScreen() {
-		setScreen(animscreen);
 	}
 }
 

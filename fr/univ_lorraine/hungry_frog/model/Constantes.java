@@ -1,6 +1,8 @@
 package fr.univ_lorraine.hungry_frog.model;
 
 public class Constantes {
+	public static final String TEXTURE_ACCEUIL = "acceuil.png";
+	public static final String TEXTURE_HEARTH = "hearth.png";
 	public static final String TEXTURE_GRASS = "grass.png";
 	public static final String TEXTURE_LINE = "line.png";
 	public static final String TEXTURE_ROAD = "road.png";
@@ -13,6 +15,7 @@ public class Constantes {
 	public static final String TEXTURE_CAR_BLUE = "car_blue";
 	public static final String TEXTURE_PAD = "pad";
 	public static final String SON_COLLISION_CAR = "collision_car.mp3";
+	public static final String SON_THEME = "theme.mp3";
 	public static final String SON_FOND = "fond.mp3";
 	public static final String SON_LIFE = "life.mp3";
 	
@@ -48,10 +51,12 @@ public class Constantes {
 	public static final int BLOC_ROAD = 2;
 	public static final int BLOC_LINE = 3;
 	
-	public static final int ROAD1 = 325;
-	public static final int ROAD2 = 245;
-	public static final int ROAD3 = 125;
-	public static final int ROAD4 = 45;
+	public static final int ROAD1 = 385;
+	public static final int ROAD2 = 335;
+	public static final int ROAD3 = 235;
+	public static final int ROAD4 = 185;
+	public static final int RIVER1 = 125;
+	public static final int RIVER2 = 45;
 	
 	public static final int NB_LEVEL = 10;
 	

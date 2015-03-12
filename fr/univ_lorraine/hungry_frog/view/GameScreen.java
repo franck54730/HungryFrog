@@ -31,7 +31,9 @@ import fr.univ_lorraine.hungry_frog.model.car.Car;
 
 public class GameScreen extends ApplicationAdapter implements Screen{
 
+    HungryFrogGame game; // Note it's "MyGame" not "Game"
 	GameListener listener;
+	Texture hearth;
     BitmapFont lifeLabel;
     BitmapFont levelLabel;
     Pad pad;
@@ -40,13 +42,15 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	Sound collisionCar;
 	Sound fond;
 	Sound life;
+	boolean start = false;
 	   OrthographicCamera camera;
 	   Viewport viewport;
 	
 	public GameScreen(HungryFrogGame g){
+		hearth = new Texture(Constantes.TEXTURE_HEARTH);
+		game = g;
 		pad = new Pad(100,100,0,0);
 		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
-		fond.loop(0.2f);
 		collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
 		life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
 		level = new Level();
@@ -63,63 +67,69 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 	
+	public void start(){
+		start=true;
+		fond.loop(0.2f);
+	}
+	
 	@Override
 	public void show(){
 		batch = new SpriteBatch();
+		start();
 	}
 
 	@Override
 	public void render(float delta) {
 	    camera.update();
-		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(new Texture(Constantes.TEXTURE_BACKGROUND),0,0);
-		Frog frog = level.getFrog();
-		frog.update(delta);
-		if(frog.isFinish())
-			level.levelUp();
-		else{
-			frog.updateTemplate();
-			frog.updateHitboxs();
-			batch.draw(frog.getTexture(), frog.getX(), frog.getY());
-			if(!level.isFlyEaten()){
-				Fly fly = level.getFly();
-				fly.update(delta);
-				fly.updateTemplate();
-				fly.updateHitboxs();
-				if(frog.hasCollision(fly)){
-					life.play(0.5f);
-					System.out.println("collision");
-					level.eatFly();
+			batch.draw(new Texture(Constantes.TEXTURE_BACKGROUND),0,0);
+			Frog frog = level.getFrog();
+			frog.update(delta);
+			if(frog.isFinish())
+				level.levelUp();
+			else{
+				frog.updateTemplate();
+				frog.updateHitboxs();
+				batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+				if(!level.isFlyEaten()){
+					Fly fly = level.getFly();
+					fly.update(delta);
+					fly.updateTemplate();
+					fly.updateHitboxs();
+					if(frog.hasCollision(fly)){
+						life.play(0.5f);
+						System.out.println("collision");
+						level.eatFly();
+					}
+					batch.draw(fly.getTexture(), fly.getX(), fly.getY());
 				}
-				batch.draw(fly.getTexture(), fly.getX(), fly.getY());
-			}
-			for(Car c : level){
-				c.update(delta);
-				c.updateTemplate();
-				c.updateHitboxs();
-				if(frog.hasCollision(c)){
-					collisionCar.play(1f);
-					System.out.println("collision v");
-					level.hitCar();
-					frog.updateHitboxs();
-					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+				for(Car c : level){
+					c.update(delta);
+					c.updateTemplate();
+					c.updateHitboxs();
+					if(frog.hasCollision(c)){
+						collisionCar.play(1f);
+						System.out.println("collision v");
+						level.hitCar();
+						frog.updateHitboxs();
+						batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+					}
+					batch.draw(c.getTexture(), c.getX(), c.getY());
 				}
-				batch.draw(c.getTexture(), c.getX(), c.getY());
+				/* boucle pour cr�e le background a partir du tableau et des bloc
+				for(Bloc b : level){
+					batch.draw(b.getTexture(), b.getX(), b.getY());
+				}*/
 			}
-			/* boucle pour cr�e le background a partir du tableau et des bloc
-			for(Bloc b : level){
-				batch.draw(b.getTexture(), b.getX(), b.getY());
-			}*/
-		}
-		lifeLabel.draw(batch, "Vie : "+level.getLife(), 10, 490);
-		lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);
-
-		if(pad.isShown()){
-			pad.updateTemplate();
-			batch.draw(pad.getTexture(), pad.getX(), pad.getY());
-		}
+			batch.draw(hearth, 10, 475);
+			lifeLabel.draw(batch, " : "+level.getLife(), 35, 490);
+			lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);
+	
+			if(pad.isShown()){
+				pad.updateTemplate();
+				batch.draw(pad.getTexture(), pad.getX(), pad.getY());
+			}
 		batch.end();
 	}
 
