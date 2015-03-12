@@ -3,6 +3,8 @@ package fr.univ_lorraine.hungry_frog.model;
 import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
@@ -18,9 +20,14 @@ public abstract class Sprite extends Element {
 	protected int speed;
 	protected Texture[][] animation;
 	protected int maxPosition;
+	protected Animation animationTest;
 	
 	public Texture getTexture() {
 		return texture;
+	}
+	
+	public void animationTest(){
+		//TextureRegion
 	}
 
 	public void setTexture(Texture texture) {

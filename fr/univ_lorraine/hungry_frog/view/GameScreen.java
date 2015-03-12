@@ -44,7 +44,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	Sound life;
 	boolean start = false;
 	   OrthographicCamera camera;
-	   Viewport viewport;
+	   //Viewport viewport;
 	
 	public GameScreen(HungryFrogGame g){
 		hearth = new Texture(Constantes.TEXTURE_HEARTH);
@@ -59,12 +59,19 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		lifeLabel.setColor(Color.WHITE);
 		levelLabel = new BitmapFont();
 		levelLabel.setColor(Color.WHITE);
-		camera = new OrthographicCamera();
-		viewport = new FitViewport(100,100,camera);
-		viewport.apply();
-
+		camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		//viewport = new FitViewport(100,100,camera);
+		//viewport.apply();
+		updateCamera();
 		camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 		Gdx.input.setInputProcessor(new GameListener(level,pad));
+	}
+	
+	public void updateCamera(){
+		int heigthScreen = Gdx.graphics.getHeight();
+		int widthScreen = Gdx.graphics.getWidth();
+		//int posX = 1
+		//int posY = 
 	}
 	
 	public void start(){
@@ -157,7 +164,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 	   @Override
 	   public void resize(int width, int height){
-	      viewport.update(width,height);
+	      //viewport.update(width,height);
 	      camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 	   }
 	   @Override

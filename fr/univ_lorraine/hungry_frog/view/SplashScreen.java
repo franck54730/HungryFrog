@@ -62,6 +62,7 @@ public class SplashScreen extends ScreenAdapter{
 			batch.begin();
 			batch.draw(img,0,0);
 			batch.end();
+			updateCamera();
 		}
 	}
 
@@ -72,4 +73,12 @@ public class SplashScreen extends ScreenAdapter{
 	      camera.position.set(camera.viewportWidth/2,camera.viewportHeight/2,0);
 	   }
 	
+
+		public void updateCamera(){
+			int heigthScreen = Gdx.graphics.getHeight()/2;
+			int widthScreen = Gdx.graphics.getWidth()/2; 
+			//camera.position.set(w,camera.viewportHeight/2,0);
+			//int posX = 1
+			//int posY = 
+		}
 }
