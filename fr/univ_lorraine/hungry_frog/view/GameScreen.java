@@ -1,6 +1,8 @@
 package fr.univ_lorraine.hungry_frog.view;
 
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -27,6 +29,7 @@ import fr.univ_lorraine.hungry_frog.model.Fly;
 import fr.univ_lorraine.hungry_frog.model.Frog;
 import fr.univ_lorraine.hungry_frog.model.Level;
 import fr.univ_lorraine.hungry_frog.model.Pad;
+import fr.univ_lorraine.hungry_frog.model.Tree;
 import fr.univ_lorraine.hungry_frog.model.car.Car;
 
 public class GameScreen extends ApplicationAdapter implements Screen{
@@ -121,6 +124,19 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
 				}
 				batch.draw(c.getTexture(), c.getX(), c.getY());
+			}
+			ArrayList<Tree> trees = level.getTrees();
+			for(Tree t : trees){
+				t.update(delta);
+				t.updateTemplate();
+				t.updateHitboxs();
+				if(frog.hasCollision(t)){
+					//	collisionCar.play(1f);
+					level.hitTree();
+					frog.updateHitboxs();
+					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
+				}
+				batch.draw(t.getTexture(), t.getX(), t.getY());
 			}
 			/* boucle pour cr�e le background a partir du tableau et des bloc
 			for(Bloc b : level){

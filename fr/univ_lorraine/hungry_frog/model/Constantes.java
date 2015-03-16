@@ -42,8 +42,8 @@ public class Constantes {
 	public static final int LEVEL_NB_BLOC_WIDTH = 14;
 	public static final int LEVEL_NB_BLOC_HEIGHT = 10;
 	
-	public static final int POS_X_START_FROG = 450;
-	public static final int POS_Y_START_FROG = 450;
+	public static final int POS_X_START_FROG = 200;
+	public static final int POS_Y_START_FROG = 480;
 	public static final int POS_X_START_FLY = 200;
 	public static final int POS_Y_START_FLY = 0;
 	

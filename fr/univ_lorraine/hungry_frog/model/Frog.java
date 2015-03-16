@@ -7,6 +7,9 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Frog extends Sprite {
 	
+	protected int lastX;
+	protected int lastY;
+	
 	public Frog() {
 		super(50, 50, Constantes.POS_X_START_FROG, Constantes.POS_Y_START_FROG);
 		tempoMax = Constantes.TEMPO_FROG;
@@ -43,6 +46,8 @@ public class Frog extends Sprite {
 	
 	@Override
 	public void update(float delta){
+		lastX = x;
+		lastY = y;
 		super.update(delta);
 		if(x < 0)
 			x = 0;
@@ -50,11 +55,17 @@ public class Frog extends Sprite {
 			x = 500-50;
 		if(y < 0)
 			y = 0;
-		else if( y > 450)
-			y = 500-50;
+		else if( y > 480)
+			y = 500-20;
 	}
 	
 	public boolean isFinish(){
 		return y < 10;
+	}
+
+	public void backPosition() {
+		// TODO Stub de la méthode généré automatiquement
+		x=lastX;
+		y=lastY;
 	}
 }
