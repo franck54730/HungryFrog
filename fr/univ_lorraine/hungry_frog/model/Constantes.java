@@ -14,6 +14,10 @@ public class Constantes {
 	public static final String TEXTURE_CAR_YELLOW = "car_yellow.png";
 	public static final String TEXTURE_CAR_BLUE = "car_blue.png";
 	public static final String TEXTURE_PAD = "pad";
+	public static final String TEXTURE_BEECH_150 = "beech1.png";
+	public static final String TEXTURE_BEECH_100 = "beech2.png";
+	public static final String TEXTURE_BEECH_50 = "beech3.png";
+	
 	public static final String SON_COLLISION_CAR = "collision_car.mp3";
 	public static final String SON_THEME = "theme.mp3";
 	public static final String SON_FOND = "fond.mp3";
@@ -55,8 +59,12 @@ public class Constantes {
 	public static final int ROAD2 = 335;
 	public static final int ROAD3 = 235;
 	public static final int ROAD4 = 185;
-	public static final int RIVER1 = 125;
-	public static final int RIVER2 = 45;
+	public static final int RIVER1 = 113;
+	public static final int RIVER2 = 88;
+	public static final int RIVER3 = 63;
+	
+	public static final int RIVER_START = 58;
+	public static final int RIVER_END = 128;
 	
 	public static final int NB_LEVEL = 10;
 	

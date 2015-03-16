@@ -30,6 +30,7 @@ import fr.univ_lorraine.hungry_frog.model.Frog;
 import fr.univ_lorraine.hungry_frog.model.Level;
 import fr.univ_lorraine.hungry_frog.model.Pad;
 import fr.univ_lorraine.hungry_frog.model.Tree;
+import fr.univ_lorraine.hungry_frog.model.beech.Beech;
 import fr.univ_lorraine.hungry_frog.model.car.Car;
 
 public class GameScreen extends ApplicationAdapter implements Screen{
@@ -96,6 +97,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		batch.draw(new Texture(Constantes.TEXTURE_BACKGROUND),0,0);
 		Frog frog = level.getFrog();
 		frog.update(delta);
+		Fly fly = level.getFly();;
 		if(frog.isFinish())
 			level.levelUp();
 		else{
@@ -103,7 +105,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			frog.updateHitboxs();
 			batch.draw(frog.getTexture(), frog.getX(), frog.getY());
 			if(!level.isFlyEaten()){
-				Fly fly = level.getFly();
 				fly.update(delta);
 				fly.updateTemplate();
 				fly.updateHitboxs();
@@ -111,7 +112,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 					//life.play(0.5f);
 					level.eatFly();
 				}
-				batch.draw(fly.getTexture(), fly.getX(), fly.getY());
 			}
 			for(Car c : level){
 				c.update(delta);
@@ -138,11 +138,34 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				}
 				batch.draw(t.getTexture(), t.getX(), t.getY());
 			}
+			ArrayList<Beech> beechs = level.getBeechs();
+			frog.outBeech();
+			for(Beech b : beechs){
+				b.update(delta);
+				b.updateTemplate();
+				b.updateHitboxs();
+				if(frog.hasCollision(b)){
+					frog.onBeech();
+					//	collisionCar.play(1f);
+					System.out.println("beech");
+					frog.updateHitboxs();
+				}
+				batch.draw(b.getTexture(), b.getX(), b.getY());
+			}
+			// si la grenouille est dans l'eau
+			if(Constantes.RIVER_START < frog.getY() && frog.getY() < Constantes.RIVER_END ){
+				if(!frog.isOnBeech()){
+					level.hitCar();
+					frog.updateHitboxs();
+				}
+			}
 			/* boucle pour cr�e le background a partir du tableau et des bloc
 			for(Bloc b : level){
 				batch.draw(b.getTexture(), b.getX(), b.getY());
 			}*/
 		}
+		batch.draw(fly.getTexture(), fly.getX(), fly.getY());
+		batch.draw(frog.getTexture(), frog.getX(), frog.getY());
 		batch.draw(hearth, 10, 475);
 		lifeLabel.draw(batch, " : "+level.getLife(), 35, 490);
 		lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);

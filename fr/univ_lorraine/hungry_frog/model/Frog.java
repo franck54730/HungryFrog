@@ -9,6 +9,7 @@ public class Frog extends Sprite {
 	
 	protected int lastX;
 	protected int lastY;
+	protected boolean onBeech = false;
 	
 	public Frog() {
 		super(50, 50, Constantes.POS_X_START_FROG, Constantes.POS_Y_START_FROG);
@@ -16,18 +17,22 @@ public class Frog extends Sprite {
 		lastDirection = "down";
 		speed = Constantes.VITESSE_RAPIDE;
 		hitbox = new Hitbox[4][3];
-		hitbox[0][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 35, 26, 9, 2);
-		hitbox[0][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 37, 34, 6, 2);
-		hitbox[0][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 37, 30, 6, 0);
-		hitbox[1][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 35, 26, 9, 2);
-		hitbox[1][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 38, 24, 9, 2);
-		hitbox[1][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 38, 30, 9, 0);
-		hitbox[2][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 35, 31, 8 ,2);
-		hitbox[2][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 33, 38, 9, 0);
-		hitbox[2][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 33, 33, 9, 2);
-		hitbox[3][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 33, 26, 8, 2);
-		hitbox[3][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 27, 30, 12, 5);
-		hitbox[3][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 33, 30, 8,0);
+		//left
+		hitbox[0][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 28, 21, 11, 4);
+		hitbox[0][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 28, 22, 15, 11);
+		hitbox[0][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 27, 18, 14, 7);
+		//right
+		hitbox[1][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 28, 21, 14, 4);
+		hitbox[1][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 28, 22, 9, 12);
+		hitbox[1][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 27, 18, 12, 7);
+		//up
+		hitbox[2][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 21, 26, 15 ,5);
+		hitbox[2][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 19, 26, 16, 10);
+		hitbox[2][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 19, 23, 16, 10);
+		//down
+		hitbox[3][0] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 21, 16, 14, 7);
+		hitbox[3][1] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 21, 21, 15, 11);
+		hitbox[3][2] = new Hitbox(Constantes.POS_X_START_FROG,Constantes.POS_Y_START_FROG, 23, 26, 14, 2);
 		initTexture();
 		updateTemplate(); 
 	}
@@ -67,5 +72,17 @@ public class Frog extends Sprite {
 		// TODO Stub de la méthode généré automatiquement
 		x=lastX;
 		y=lastY;
+	}
+
+	public void outBeech() {
+		onBeech=false;
+	}
+
+	public void onBeech() {
+		onBeech=true;
+	}
+
+	public boolean isOnBeech() {
+		return onBeech;
 	}
 }
