@@ -43,9 +43,11 @@ public class GameScreen extends ApplicationAdapter implements Screen{
     Pad pad;
 	SpriteBatch batch;
 	Level level;
-	//Sound collisionCar;
-	//Sound fond;
-	//Sound life;
+	Sound collisionCar;
+	Sound collisionWater;
+	Sound collisionTree;
+	Sound fond;
+	Sound life;
 	boolean start = false;
 	   OrthographicCamera camera;
 	   Viewport viewport;
@@ -54,9 +56,11 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		hearth = new Texture(Constantes.TEXTURE_HEARTH);
 		game = g;
 		pad = new Pad(100,100,0,0);
-		//fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
-		//collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
-		//life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
+		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
+		collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
+		collisionWater = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_WATER));
+		collisionTree = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_TREE));
+		life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
 		level = new Level();
 		batch = new SpriteBatch();
 		lifeLabel = new BitmapFont();
@@ -73,13 +77,11 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	public void updateCamera(){
 		int heigthScreen = Gdx.graphics.getHeight();
 		int widthScreen = Gdx.graphics.getWidth();
-		//int posX = 1
-		//int posY = 
 	}
 	
 	public void start(){
 		start=true;
-		//fond.loop(0.2f);
+		fond.loop(0.2f);
 	}
 	
 	@Override
@@ -109,7 +111,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				fly.updateTemplate();
 				fly.updateHitboxs();
 				if(frog.hasCollision(fly)){
-					//life.play(0.5f);
+					life.play(0.5f);
 					level.eatFly();
 				}
 			}
@@ -118,7 +120,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				c.updateTemplate();
 				c.updateHitboxs();
 				if(frog.hasCollision(c)){
-					//	collisionCar.play(1f);
+					collisionCar.play(1f);
 					level.hitCar();
 					frog.updateHitboxs();
 					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
@@ -131,7 +133,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				t.updateTemplate();
 				t.updateHitboxs();
 				if(frog.hasCollision(t)){
-					//	collisionCar.play(1f);
+					collisionTree.play(1f);
 					level.hitTree();
 					frog.updateHitboxs();
 					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
@@ -146,8 +148,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				b.updateHitboxs();
 				if(frog.hasCollision(b)){
 					frog.onBeech();
-					//	collisionCar.play(1f);
-					System.out.println("beech");
 					frog.updateHitboxs();
 				}
 				batch.draw(b.getTexture(), b.getX(), b.getY());
@@ -155,16 +155,14 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			// si la grenouille est dans l'eau
 			if(Constantes.RIVER_START < frog.getY() && frog.getY() < Constantes.RIVER_END ){
 				if(!frog.isOnBeech()){
+					collisionWater.play(1f);
 					level.hitCar();
 					frog.updateHitboxs();
 				}
 			}
-			/* boucle pour cr�e le background a partir du tableau et des bloc
-			for(Bloc b : level){
-				batch.draw(b.getTexture(), b.getX(), b.getY());
-			}*/
 		}
-		batch.draw(fly.getTexture(), fly.getX(), fly.getY());
+		if(!level.isFlyEaten())
+			batch.draw(fly.getTexture(), fly.getX(), fly.getY());
 		batch.draw(frog.getTexture(), frog.getX(), frog.getY());
 		batch.draw(hearth, 10, 475);
 		lifeLabel.draw(batch, " : "+level.getLife(), 35, 490);

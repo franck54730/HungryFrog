@@ -25,7 +25,7 @@ public class SplashScreen extends ScreenAdapter{
 		this.hungryfrog = hungryfrog;
 		batch = new SpriteBatch();
 		img = new Texture(Constantes.TEXTURE_ACCEUIL);
-	//	fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_THEME));
+		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_THEME));
 		camera = new OrthographicCamera();
 		viewport = new FitViewport(500,500,camera);
 		viewport.apply();
@@ -35,13 +35,12 @@ public class SplashScreen extends ScreenAdapter{
 	
 	public void start(){
 		start=true;
-		//fond.loop(0.2f);
+		fond.loop(0.2f);
 	}
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		//fond.pause();
+		fond.pause();
 	}
 	
 	@Override

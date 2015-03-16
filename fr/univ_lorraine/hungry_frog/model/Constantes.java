@@ -18,10 +18,13 @@ public class Constantes {
 	public static final String TEXTURE_BEECH_100 = "beech2.png";
 	public static final String TEXTURE_BEECH_50 = "beech3.png";
 	
-	public static final String SON_COLLISION_CAR = "collision_car.mp3";
-	public static final String SON_THEME = "theme.mp3";
-	public static final String SON_FOND = "fond.mp3";
-	public static final String SON_LIFE = "life.mp3";
+	public static final String SON_COLLISION_CAR = "collision_car.wav";
+	public static final String SON_COLLISION_WATER = "collision_water.wav";
+	public static final String SON_COLLISION_TREE = "collision_tree.wav";
+	public static final String SON_THEME = "theme.wav";
+	public static final String SON_FOND = "fond.wav";
+	public static final String SON_LIFE = "life.wav";
+	public static final String SON_WIN = "win.wav";
 	
 	public static final int BLOC_DIMENSION = 50;
 	
