@@ -13,18 +13,12 @@ public class CarYellow extends Car {
 		super(x, y, d, xD);
 		speed = Constantes.VITESSE_RAPIDE;
 		hitbox = new Hitbox[2][2];
-		hitbox[0][0] = new Hitbox(x, y, 88, 42, 6, 27 );
-		hitbox[0][1] = new Hitbox(x, y, 88, 42, 6, 27 );
-		hitbox[1][0] = new Hitbox(x, y, 88, 42, 7, 27 );
-		hitbox[1][1] = new Hitbox(x, y, 88, 42, 7, 27 );
-	}
-
-	@Override
-	protected void initTexture() {
-		animation = new Texture[2][2];
-		animation[0][0] = new Texture(Constantes.TEXTURE_CAR_YELLOW+"_left_1.png");
-		animation[0][1] = new Texture(Constantes.TEXTURE_CAR_YELLOW+"_left_2.png");
-		animation[1][0] = new Texture(Constantes.TEXTURE_CAR_YELLOW+"_right_1.png");
-		animation[1][1] = new Texture(Constantes.TEXTURE_CAR_YELLOW+"_right_2.png");
+		hitbox[0][0] = new Hitbox(x, y, 88, 32, 6, 27 );
+		hitbox[0][1] = new Hitbox(x, y, 88, 32, 6, 27 );
+		hitbox[1][0] = new Hitbox(x, y, 88, 32, 7, 27 );
+		hitbox[1][1] = new Hitbox(x, y, 88, 32, 7, 27 );
+		texturePath = Constantes.TEXTURE_CAR_YELLOW;
+		initTexture();
+		updateTemplate(); 
 	}
 }

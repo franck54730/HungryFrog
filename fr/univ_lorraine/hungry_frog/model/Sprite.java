@@ -12,17 +12,17 @@ import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 public abstract class Sprite extends Element {
 
 	protected String lastDirection;
-	protected Texture texture;	
+	protected TextureRegion texture;	
 	protected Constantes.DIRECTION direction = Constantes.DIRECTION.STOP;
 	protected int position;
 	protected int tempo = 0;
 	protected int tempoMax;
 	protected int speed;
-	protected Texture[][] animation;
+	protected TextureRegion[][] animation;
 	protected int maxPosition;
 	protected Animation animationTest;
 	
-	public Texture getTexture() {
+	public TextureRegion getTexture() {
 		return texture;
 	}
 	
@@ -30,13 +30,13 @@ public abstract class Sprite extends Element {
 		//TextureRegion
 	}
 
-	public void setTexture(Texture texture) {
+	public void setTexture(TextureRegion texture) {
 		this.texture = texture;
 	}
 	
 	public Sprite(int h, int w, int cx, int cy){
 		super(h, w, cx, cy);
-		initTexture();
+		//initTexture();
 		position = 1;
 		maxPosition = 3;
 	}

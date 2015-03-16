@@ -8,11 +8,11 @@ public class Constantes {
 	public static final String TEXTURE_ROAD = "road.png";
 	public static final String TEXTURE_TREE = "tree.png";
 	public static final String TEXTURE_BACKGROUND = "background.png";
-	public static final String TEXTURE_FROG = "frog";
-	public static final String TEXTURE_FLY = "fly";
-	public static final String TEXTURE_CAR_RED = "car_red";
-	public static final String TEXTURE_CAR_YELLOW = "car_yellow";
-	public static final String TEXTURE_CAR_BLUE = "car_blue";
+	public static final String TEXTURE_FROG = "frog.png";
+	public static final String TEXTURE_FLY = "fly.png";
+	public static final String TEXTURE_CAR_RED = "car_red.png";
+	public static final String TEXTURE_CAR_YELLOW = "car_yellow.png";
+	public static final String TEXTURE_CAR_BLUE = "car_blue.png";
 	public static final String TEXTURE_PAD = "pad";
 	public static final String SON_COLLISION_CAR = "collision_car.mp3";
 	public static final String SON_THEME = "theme.mp3";

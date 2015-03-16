@@ -3,6 +3,7 @@ package fr.univ_lorraine.hungry_frog.model;
 import java.util.Random;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
@@ -48,6 +49,7 @@ public class Fly extends Sprite {
 				direction = DIRECTION.DOWN ;
 				break;
 		}
+		initTexture();
 		updateTemplate(); 
 	}
 
@@ -76,19 +78,14 @@ public class Fly extends Sprite {
 
 	@Override
 	protected void initTexture() {
-		animation = new Texture[4][3];
-		animation[0][0] = new Texture(Constantes.TEXTURE_FLY+"_left_1.png");
-		animation[0][1] = new Texture(Constantes.TEXTURE_FLY+"_left_2.png");
-		animation[0][2] = new Texture(Constantes.TEXTURE_FLY+"_left_3.png");
-		animation[1][0] = new Texture(Constantes.TEXTURE_FLY+"_right_1.png");
-		animation[1][1] = new Texture(Constantes.TEXTURE_FLY+"_right_2.png");
-		animation[1][2] = new Texture(Constantes.TEXTURE_FLY+"_right_3.png");
-		animation[2][0] = new Texture(Constantes.TEXTURE_FLY+"_up_1.png");
-		animation[2][1] = new Texture(Constantes.TEXTURE_FLY+"_up_2.png");
-		animation[2][2] = new Texture(Constantes.TEXTURE_FLY+"_up_3.png");
-		animation[3][0] = new Texture(Constantes.TEXTURE_FLY+"_down_1.png");
-		animation[3][1] = new Texture(Constantes.TEXTURE_FLY+"_down_2.png");
-		animation[3][2] = new Texture(Constantes.TEXTURE_FLY+"_down_3.png");
+		animation = new TextureRegion[4][3];
+		Texture texture = new Texture(Constantes.TEXTURE_FLY);
+		for(int direction = 0; direction < 4; direction++){
+			for(int image = 0; image < 3; image++){
+				int x = (direction*(width*3))+(image*width);
+				animation[direction][image] = new TextureRegion(texture, x, 0, width, width);
+			}
+		}
 	}
 	
 	

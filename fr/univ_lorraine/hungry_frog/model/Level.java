@@ -31,6 +31,7 @@ public class Level implements Iterable<Car> {
 		route = new ArrayList[10];
 		frog = new Frog();
 		fly = new Fly();
+
 		route[0] = new ArrayList<Car>();
 		route[0].add(new CarRed(500, Constantes.ROAD1, DIRECTION.LEFT, 500));
 		route[0].add(new CarRed(400, Constantes.ROAD2, DIRECTION.LEFT, 500));
