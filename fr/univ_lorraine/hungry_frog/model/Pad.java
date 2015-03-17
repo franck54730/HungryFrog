@@ -66,6 +66,7 @@ public class Pad extends Element {
 
 	public void hide() {
 		shown = false;
+		direction = DIRECTION.STOP;
 	}
 
 	//avec cx et cy origine en haut a gauche de la fenetre

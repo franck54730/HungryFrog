@@ -16,9 +16,7 @@ public class GameOverScreen extends ScreenAdapter{
 	HungryFrogGame hungryfrog;
 	SpriteBatch batch;
 	Texture img;
-	boolean show = false;
 	Sound fond;
-	int tempo = 0;
 	OrthographicCamera camera;
 	Viewport viewport;
 	boolean start = true;
@@ -37,6 +35,7 @@ public class GameOverScreen extends ScreenAdapter{
 	
 	public void start(){
 		start=true;
+		fond.loop(0.2f);
 	}
 
 	@Override
@@ -51,7 +50,6 @@ public class GameOverScreen extends ScreenAdapter{
 	}
 	
 	public void render(float delta){
-		tempo++;
 	    camera.update();
 	    batch.setProjectionMatrix(camera.combined);
 		if(start){
@@ -60,12 +58,7 @@ public class GameOverScreen extends ScreenAdapter{
 			}
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			batch.begin();
-			if(tempo == 60){
-				show = true;
-				fond.loop(0.2f);
-			}
-			if(show)
-				batch.draw(img,0,0);
+			batch.draw(img,0,0);
 			batch.end();
 		}
 	}

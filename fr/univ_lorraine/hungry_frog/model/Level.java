@@ -7,6 +7,7 @@ import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 import fr.univ_lorraine.hungry_frog.model.beech.Beech;
 import fr.univ_lorraine.hungry_frog.model.beech.Beech100;
 import fr.univ_lorraine.hungry_frog.model.beech.Beech150;
+import fr.univ_lorraine.hungry_frog.model.beech.Beech50;
 import fr.univ_lorraine.hungry_frog.model.bloc.Bloc;
 import fr.univ_lorraine.hungry_frog.model.bloc.BlocGrass;
 import fr.univ_lorraine.hungry_frog.model.bloc.BlocLine;
@@ -68,9 +69,9 @@ public class Level implements Iterable<Car> {
 		beechs[1].add(new Beech150(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
 		beechs[1].add(new Beech100(450, Constantes.RIVER1, DIRECTION.RIGHT, 500));
 		beechs[1].add(new Beech150(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
-		beechs[1].add(new Beech100(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[1].add(new Beech150(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
 		beechs[1].add(new Beech150(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
-		beechs[1].add(new Beech100(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
+		beechs[1].add(new Beech150(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[2] = new ArrayList<Car>();
 		route[2].add(new CarYellow(500, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -83,6 +84,12 @@ public class Level implements Iterable<Car> {
 		trees[2].add(new Tree(300,300));
 		trees[2].add(new Tree(400,0));
 		beechs[2] = new ArrayList<Beech>();
+		beechs[2].add(new Beech150(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[2].add(new Beech100(450, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[2].add(new Beech150(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[2].add(new Beech100(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[2].add(new Beech150(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
+		beechs[2].add(new Beech150(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[3] = new ArrayList<Car>();
 		route[3].add(new CarBlue(500, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -96,6 +103,12 @@ public class Level implements Iterable<Car> {
 		trees[3].add(new Tree(400,0));
 		trees[3].add(new Tree(150,0));
 		beechs[3] = new ArrayList<Beech>();
+		beechs[3].add(new Beech150(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[3].add(new Beech100(450, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[3].add(new Beech150(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[3].add(new Beech100(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[3].add(new Beech150(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
+		beechs[3].add(new Beech100(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[4] = new ArrayList<Car>();
 		route[4].add(new CarBlue(500, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -110,6 +123,12 @@ public class Level implements Iterable<Car> {
 		trees[4].add(new Tree(400,0));
 		trees[4].add(new Tree(150,0));
 		beechs[4] = new ArrayList<Beech>();
+		beechs[4].add(new Beech100(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[4].add(new Beech100(450, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[4].add(new Beech150(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[4].add(new Beech100(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[4].add(new Beech150(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
+		beechs[4].add(new Beech100(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[5] = new ArrayList<Car>();
 		route[5].add(new CarRed(200, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -127,6 +146,12 @@ public class Level implements Iterable<Car> {
 		trees[5].add(new Tree(400,0));
 		trees[5].add(new Tree(150,0));
 		beechs[5] = new ArrayList<Beech>();
+		beechs[5].add(new Beech100(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[5].add(new Beech100(450, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[5].add(new Beech100(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[5].add(new Beech100(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[5].add(new Beech100(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
+		beechs[5].add(new Beech100(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[6] = new ArrayList<Car>();
 		route[6].add(new CarYellow(200, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -145,6 +170,12 @@ public class Level implements Iterable<Car> {
 		trees[6].add(new Tree(150,0));
 		trees[6].add(new Tree(200,0));
 		beechs[6] = new ArrayList<Beech>();
+		beechs[6].add(new Beech100(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[6].add(new Beech50(450, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[6].add(new Beech100(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[6].add(new Beech50(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[6].add(new Beech100(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
+		beechs[6].add(new Beech50(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[7] = new ArrayList<Car>();
 		route[7].add(new CarBlue(200, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -164,6 +195,12 @@ public class Level implements Iterable<Car> {
 		trees[7].add(new Tree(150,0));
 		trees[7].add(new Tree(200,0));
 		beechs[7] = new ArrayList<Beech>();
+		beechs[7].add(new Beech50(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[7].add(new Beech50(450, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[7].add(new Beech50(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[7].add(new Beech50(50, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[7].add(new Beech50(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
+		beechs[7].add(new Beech50(500, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[8] = new ArrayList<Car>();
 		route[8].add(new CarYellow(200, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -186,6 +223,9 @@ public class Level implements Iterable<Car> {
 		trees[8].add(new Tree(150,0));
 		trees[8].add(new Tree(200,0));
 		beechs[8] = new ArrayList<Beech>();
+		beechs[8].add(new Beech150(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[8].add(new Beech100(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[8].add(new Beech150(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		
 		route[9] = new ArrayList<Car>();
 		route[9].add(new CarBlue(200, Constantes.ROAD1, DIRECTION.LEFT, 500));
@@ -209,6 +249,9 @@ public class Level implements Iterable<Car> {
 		trees[9].add(new Tree(200,0));
 		trees[9].add(new Tree(250,0));
 		beechs[9] = new ArrayList<Beech>();
+		beechs[9].add(new Beech100(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
+		beechs[9].add(new Beech50(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
+		beechs[9].add(new Beech100(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
 		/*
 		for(int height = 0; height < Constantes.LEVEL_NB_BLOC_HEIGHT; height++){
 			for(int width = 0; width < Constantes.LEVEL_NB_BLOC_WIDTH; width++){
