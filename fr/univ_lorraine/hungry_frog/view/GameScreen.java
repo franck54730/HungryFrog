@@ -172,6 +172,11 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			pad.updateTemplate();
 			batch.draw(pad.getTexture(), pad.getX(), pad.getY());
 		}
+		if(level.isLoose())
+			game.setScreen(game.gameoverscreen);
+		else if(level.isEnd())
+			game.setScreen(game.endscreen);
+		
 		batch.end();
 	}
 
@@ -189,8 +194,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 	@Override
 	public void hide() {
-		// TODO Auto-generated method stub
-		
+		fond.pause();
 	}
 
 	@Override

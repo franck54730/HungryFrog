@@ -27,6 +27,7 @@ public class Level implements Iterable<Car> {
 	protected Frog frog;
 	protected Fly fly;
 	protected int life = 5;
+	protected boolean end = false;
 	
 	protected boolean flyEaten = false;
 	
@@ -290,19 +291,17 @@ public class Level implements Iterable<Car> {
 		frog.backPosition();
 	}
 	
-	public boolean loose(){
-		return life == 0;
-	}
-	
 	public int getLife(){
 		return life;
 	}
 	
 	public void levelUp(){
 		//si il y a encore un level prochaine sinon on refait le dernier
-		if(level < Constantes.NB_LEVEL-1)
+		if(level < Constantes.NB_LEVEL-1){
 			level++;
-		
+//			end =  true; //a décommenter pour avoir que 1 lvl
+		}else
+			end = true;
 		flyEaten = false;
 		fly.setX(Constantes.POS_X_START_FLY);
 		fly.setY(Constantes.POS_Y_START_FLY);
@@ -316,5 +315,13 @@ public class Level implements Iterable<Car> {
 	}
 	public ArrayList<Beech> getBeechs() {
 		return beechs[level];
+	}
+	public boolean isEnd() {
+		// TODO Stub de la méthode généré automatiquement
+		return end;
+	}
+	public boolean isLoose() {
+		// TODO Stub de la méthode généré automatiquement
+		return life == 0;
 	}
 }

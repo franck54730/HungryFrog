@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.FPSLogger;
 public class HungryFrogGame extends Game {
 	protected GameScreen animscreen;
 	protected SplashScreen splashscreen;
+	protected EndScreen endscreen;
+	protected GameOverScreen gameoverscreen;
 	protected FPSLogger logger;
 	
 	@Override
@@ -14,6 +16,8 @@ public class HungryFrogGame extends Game {
 		logger = new FPSLogger();
 		animscreen = new GameScreen(this);	
 		splashscreen = new SplashScreen(this);
+		endscreen = new EndScreen(this);
+		gameoverscreen = new GameOverScreen(this);
 		//setGameScreen();
 		setScreen(splashscreen);	
 	}

@@ -2,6 +2,8 @@ package fr.univ_lorraine.hungry_frog.model;
 
 public class Constantes {
 	public static final String TEXTURE_ACCEUIL = "acceuil.png";
+	public static final String TEXTURE_GAME_OVER = "game_over.png";
+	public static final String TEXTURE_END = "end.png";
 	public static final String TEXTURE_HEARTH = "hearth.png";
 	public static final String TEXTURE_GRASS = "grass.png";
 	public static final String TEXTURE_LINE = "line.png";
@@ -25,6 +27,7 @@ public class Constantes {
 	public static final String SON_FOND = "fond.wav";
 	public static final String SON_LIFE = "life.wav";
 	public static final String SON_WIN = "win.wav";
+	public static final String SON_GAME_OVER = "fond.wav";
 	
 	public static final int BLOC_DIMENSION = 50;
 	
