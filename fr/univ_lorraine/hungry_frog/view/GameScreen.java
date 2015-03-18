@@ -49,28 +49,34 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	Sound fond;
 	Sound life;
 	boolean start = false;
-	   OrthographicCamera camera;
-	   Viewport viewport;
+	OrthographicCamera camera;
+	Viewport viewport;
+	int yCamera;
+	int viewportHeight;
+	int viewportWidth;
+	
 	
 	public GameScreen(HungryFrogGame g){
 		hearth = new Texture(Constantes.TEXTURE_HEARTH);
 		game = g;
-		pad = new Pad(100,100,0,0);
 		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
 		collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
 		collisionWater = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_WATER));
 		collisionTree = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_TREE));
 		life = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_LIFE));
 		level = new Level();
+		pad = new Pad(100,100,0,0,level.getFrog());
 		batch = new SpriteBatch();
 		lifeLabel = new BitmapFont();
 		lifeLabel.setColor(Color.WHITE);
 		levelLabel = new BitmapFont();
 		levelLabel.setColor(Color.WHITE);
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(500,500,camera);
+		viewportWidth = 500;
+		viewportHeight = (500*Gdx.graphics.getHeight())/Gdx.graphics.getWidth();
+		viewport = new StretchViewport(viewportWidth,viewportHeight,camera);
 		viewport.apply();
-		camera.position.set(500/2,500/2,0);
+		camera.position.set(500/2, Constantes.positionYCameraFromFrog(level.getFrog().getY(), viewportHeight),0);
 		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 	
@@ -96,7 +102,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	    batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(new Texture(Constantes.TEXTURE_BACKGROUND),0,0);
+		batch.draw(level.getBackground(),0,0);
 		Frog frog = level.getFrog();
 		frog.update(delta);
 		Fly fly = level.getFly();;
@@ -163,20 +169,29 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		}
 		if(!level.isFlyEaten())
 			batch.draw(fly.getTexture(), fly.getX(), fly.getY());
+		int cameraTravelingY = (int) camera.position.y;
+		camera.position.set(500/2, Constantes.positionYCameraFromFrog(level.getFrog().getY(), viewportHeight),0);
+		cameraTravelingY -= camera.position.y;
 		batch.draw(frog.getTexture(), frog.getX(), frog.getY());
-		batch.draw(hearth, 10, 475);
-		lifeLabel.draw(batch, " : "+level.getLife(), 35, 490);
-		lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, 490);
+		
+		//calcul de la position du haut de l'ecran par rapport au fond
+		int yCamera = Constantes.positionYCameraFromFrog(level.getFrog().getY(), viewportHeight);
+		int decalage = viewportHeight/2;
+		int yTop = (yCamera+decalage);
+		//affichag du hud
+		batch.draw(hearth, 10, yTop-25);
+		lifeLabel.draw(batch, " : "+level.getLife(), 35, yTop-10);
+		lifeLabel.draw(batch, "Level : "+level.getLevel(), 440, yTop-10);
 
 		if(pad.isShown()){
+			pad.translateY(cameraTravelingY);
 			pad.updateTemplate();
-			batch.draw(pad.getTexture(), pad.getX(), pad.getY());
+			batch.draw(pad.getTexture(), pad.getX(), pad.getY(), pad.getWidth(), pad.getWidth());
 		}
 		if(level.isLoose())
 			game.setScreen(game.gameoverscreen);
 		else if(level.isEnd())
 			game.setScreen(game.endscreen);
-		
 		batch.end();
 	}
 
@@ -204,7 +219,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	   @Override
 	   public void resize(int width, int height){
 		      viewport.update(width,height);
-		      camera.position.set(500/2,500/2,0);
+			  camera.position.set(500/2, Constantes.positionYCameraFromFrog(level.getFrog().getY(), viewportHeight),0);
 	   }
 	   @Override
 	public void create(){

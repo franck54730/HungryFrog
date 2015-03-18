@@ -3,6 +3,8 @@ package fr.univ_lorraine.hungry_frog.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.badlogic.gdx.graphics.Texture;
+
 import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 import fr.univ_lorraine.hungry_frog.model.beech.Beech;
 import fr.univ_lorraine.hungry_frog.model.beech.Beech100;
@@ -29,6 +31,7 @@ public class Level implements Iterable<Car> {
 	protected Fly fly;
 	protected int life = 5;
 	protected boolean end = false;
+	protected Texture background;
 	
 	protected boolean flyEaten = false;
 	
@@ -38,7 +41,7 @@ public class Level implements Iterable<Car> {
 		beechs = new ArrayList[10];
 		frog = new Frog();
 		fly = new Fly();
-
+		background = new Texture(Constantes.TEXTURE_BACKGROUND);
 		route[0] = new ArrayList<Car>();
 		route[0].add(new CarRed(500, Constantes.ROAD1, DIRECTION.LEFT, 500));
 		route[0].add(new CarRed(400, Constantes.ROAD2, DIRECTION.LEFT, 500));
@@ -366,5 +369,9 @@ public class Level implements Iterable<Car> {
 	public boolean isLoose() {
 		// TODO Stub de la méthode généré automatiquement
 		return life == 0;
+	}
+	public Texture getBackground() {
+		// TODO Stub de la méthode généré automatiquement
+		return background;
 	}
 }

@@ -13,16 +13,19 @@ public class Pad extends Element {
 	protected Constantes.DIRECTION direction = Constantes.DIRECTION.STOP;
 	protected Texture[] animation;
 	protected Texture texture;
-	protected int xNow;
-	protected int yNow;
 	protected int centerX;
 	protected int centerY;
 	protected boolean shown = false;
+	protected Frog frog;
 	
-	public Pad(int h, int w, int cx, int cy){
+	public Pad(int h, int w, int cx, int cy, Frog f){
 		super(h, w, cx, cy);
+		frog = f;
 		direction = DIRECTION.STOP;
 		animation = new Texture[5];
+		width = 150;
+		//conversion avec une largeur d'ecran de 500
+		width = 500*width/Gdx.graphics.getWidth();
 		animation[0] = new Texture(Constantes.TEXTURE_PAD+"_left.png");
 		animation[1] = new Texture(Constantes.TEXTURE_PAD+"_right.png");
 		animation[2] = new Texture(Constantes.TEXTURE_PAD+"_up.png");
@@ -71,54 +74,41 @@ public class Pad extends Element {
 
 	//avec cx et cy origine en haut a gauche de la fenetre
 	public void setPosition(int cx, int cy){
-		//recalculer en fonction de la screen et du viewport
+		//replacement en fonction de l'origine
 		int w = Gdx.graphics.getWidth();
 		int h = Gdx.graphics.getHeight();
 		cy=h-cy;
-		
-		//on retire la valeur des bandes a gauche et en haut (pour etre dans un contexte largeur = hauteur
-		int toRemoveLeft = (w-h);
-		toRemoveLeft = toRemoveLeft>0?toRemoveLeft:0;
-		int toRemoveUp = (h-w);
-		toRemoveUp = toRemoveUp>0?toRemoveUp:0;
-		//maj de cx et cy, on retire la moitier de ce qu'il y a a retirer
-		cx -= toRemoveLeft/2;
-		cy -= toRemoveUp/2;
-		
-		int contexte = w<h?w:h;
-		//calcul avec une largeur et une hauteur de 500 px
-		cy = (cy*500)/contexte;
-		cx = (cx*500)/contexte;
-		x = cx-50;//-(w>h?(w-h):w);
-		y = cy-50;//-(w<h?(h-w)/2:h);
+		//on recalcul les coordonnées dans le view port
+		int viewportHeight = (500*Gdx.graphics.getHeight())/Gdx.graphics.getWidth();
+		int viewportWidth = 500;
+		cx = viewportWidth*cx/w;
+		cy = viewportHeight*cy/h;
+		int viewportPosY = Constantes.positionYCameraFromFrog(frog.getY(), viewportHeight)-(viewportHeight/2);
+		cy = viewportPosY+cy;
+		//on retranche la moitier de la largeur et de la hauteur de l'image
+		x = cx-(width/2);
+		y = cy-(width/2);
 		centerX = cx;
 		centerY = cy;
 	}
 	
 	public void update(int cx, int cy){
-		//TODO mettre les formules vue en td
-		//System.out.println("cx : "+cx + " cy : "+  cy);
+		//replacement en fonction de l'origine
 		int w = Gdx.graphics.getWidth();
 		int h = Gdx.graphics.getHeight();
 		cy=h-cy;
-		
-		//on retire la valeur des bandes a gauche et en haut (pour etre dans un contexte largeur = hauteur
-		int toRemoveLeft = (w-h);
-		toRemoveLeft = toRemoveLeft>0?toRemoveLeft:0;
-		int toRemoveUp = (h-w);
-		toRemoveUp = toRemoveUp>0?toRemoveUp:0;
-		//maj de cx et cy, on retire la moitier de ce qu'il y a a retirer
-		cx -= toRemoveLeft/2;
-		cy -= toRemoveUp/2;
-		
-		int contexte = w<h?w:h;
-		//calcul avec une largeur et une hauteur de 500 px
-		cy = (cy*500)/contexte;
-		cx = (cx*500)/contexte;
+		//on recalcul les coordonnées dans le view port
+		int viewportHeight = (500*Gdx.graphics.getHeight())/Gdx.graphics.getWidth();
+		int viewportWidth = 500;
+		cx = viewportWidth*cx/w;
+		cy = viewportHeight*cy/h;
+		int viewportPosY = Constantes.positionYCameraFromFrog(frog.getY(), viewportHeight)-(viewportHeight/2);
+		cy = viewportPosY+cy;
 		
 		int coorX = centerX-cx;
 		coorX = -coorX;
 		int coorY = centerY-cy;
+		System.out.println("coorX : "+coorX+" coorY : "+coorY);
 		//boolean gauche = (18 < coordX && cordX < 50) && () ;
 		int a = coorY+coorX;
 		int b = coorY-coorX;
@@ -151,5 +141,10 @@ public class Pad extends Element {
 	@Override
 	public Hitbox getHitbox() {
 		return null;
+	}
+
+	public void translateY(int cameraTravelingY) {
+		y -= cameraTravelingY;
+		centerY -= cameraTravelingY;
 	}
 }

@@ -123,6 +123,17 @@ public class Constantes {
 		return rep;
 	}
 
+	public static int positionYCameraFromFrog(int yFrog, int viewportHeight){
+		int start = 500-(viewportHeight/2);
+		int end = (viewportHeight/2);
+		if(yFrog>start)
+			yFrog = start;
+		if(yFrog<end)
+			yFrog = end;
+		return yFrog;
+		
+	}
+	
 	public static final int VITESSE_TRES_LENT = 5;
 	public static final int VITESSE_LENT = 20;
 	public static final int VITESSE_NORMAL = 80;
