@@ -108,14 +108,12 @@ public class Pad extends Element {
 		int coorX = centerX-cx;
 		coorX = -coorX;
 		int coorY = centerY-cy;
-		System.out.println("coorX : "+coorX+" coorY : "+coorY);
-		//boolean gauche = (18 < coordX && cordX < 50) && () ;
 		int a = coorY+coorX;
 		int b = coorY-coorX;
-		boolean left = a < 0 && b > 0 && coorX > -70 && coorX < -18;
-		boolean right = a > 0 && b < 0 && coorX > 18 && coorX < 70;
-		boolean up = a < 0 && b < 0 && coorY > -70 && coorY < -18;
-		boolean down = a > 0 && b > 0 && coorY > 18 && coorY < 70;
+		boolean left = a < 0 && b > 0 && coorX > -100 && coorX < -13;
+		boolean right = a > 0 && b < 0 && coorX > 13 && coorX < 100;
+		boolean up = a < 0 && b < 0 && coorY > -100 && coorY < -13;
+		boolean down = a > 0 && b > 0 && coorY > 13 && coorY < 100;
 		if(left)
 			direction = DIRECTION.LEFT;
 		else if(right)
@@ -126,16 +124,6 @@ public class Pad extends Element {
 			direction = DIRECTION.DOWN;
 		else 
 			direction = DIRECTION.STOP;
-	/*	y+x = a
-				y-x = b
-		xNow = cx;
-		yNow = cy;
-		int y2 = y-centerY; 
-		gauche = (y2+x < 0)&& (y2-x > 0) && (condition encadrement x)
-		droite = (y2+x > 0) && (y2-x < 0) && (condition encadrement x)
-		haut = (y2+x > 0) && (y2-x > 0) && (condition encadrement x)
-		bas = (y2+x < 0) && (y2-x < 0) && (condition encadrement x)
-		*/
 	}
 
 	@Override

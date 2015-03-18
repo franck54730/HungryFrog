@@ -19,6 +19,12 @@ public class Constantes {
 	public static final String TEXTURE_BEECH_150 = "beech1.png";
 	public static final String TEXTURE_BEECH_100 = "beech2.png";
 	public static final String TEXTURE_BEECH_50 = "beech3.png";
+	public static final String TEXTURE_BT_PLAY_1 = "button_play_1.png";
+	public static final String TEXTURE_BT_PLAY_2 = "button_play_2.png";
+	public static final String TEXTURE_BT_REPLAY_1 = "button_replay_1.png";
+	public static final String TEXTURE_BT_REPLAY_2 = "button_replay_2.png";
+	public static final String TEXTURE_BT_QUIT_1 = "button_quit_1.png";
+	public static final String TEXTURE_BT_QUIT_2 = "button_quit_2.png";
 	
 	public static final String SON_COLLISION_CAR = "collision_car.wav";
 	public static final String SON_COLLISION_WATER = "collision_water.wav";

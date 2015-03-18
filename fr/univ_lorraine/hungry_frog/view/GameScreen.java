@@ -77,7 +77,6 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 		viewport = new StretchViewport(viewportWidth,viewportHeight,camera);
 		viewport.apply();
 		camera.position.set(500/2, Constantes.positionYCameraFromFrog(level.getFrog().getY(), viewportHeight),0);
-		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 	
 	public void updateCamera(){
@@ -93,7 +92,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	@Override
 	public void show(){
 		batch = new SpriteBatch();
-		start();
+		start();		
+		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 
 	@Override
