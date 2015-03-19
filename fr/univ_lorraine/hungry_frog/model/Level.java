@@ -255,38 +255,6 @@ public class Level implements Iterable<Car> {
 		beechs[9].add(new Beech100(250, Constantes.RIVER1, DIRECTION.RIGHT, 500));
 		beechs[9].add(new Beech50(250, Constantes.RIVER2, DIRECTION.LEFT, 500));
 		beechs[9].add(new Beech100(300, Constantes.RIVER3, DIRECTION.RIGHT, 500));
-		/*
-		for(int height = 0; height < Constantes.LEVEL_NB_BLOC_HEIGHT; height++){
-			for(int width = 0; width < Constantes.LEVEL_NB_BLOC_WIDTH; width++){
-				Bloc b = null;
-				switch(Constantes.LEVEL_BACKGROUND_INT[height][width]){
-					case Constantes.BLOC_GRASS : b = new BlocGrass(width*Constantes.BLOC_DIMENSION, height*Constantes.BLOC_DIMENSION);
-													 break;
-					case Constantes.BLOC_LINE : b = new BlocLine(width*Constantes.BLOC_DIMENSION, height*Constantes.BLOC_DIMENSION);
-					 								break;
-					case Constantes.BLOC_ROAD : b = new BlocRoad(width*Constantes.BLOC_DIMENSION, height*Constantes.BLOC_DIMENSION);
-					 								break;
-				}
-				background.add(b);
-			}
-		}*/
-		// ajout des arbres dans le niveau (de facon logique il ne seront pas afficher, il font partie de background.png)
-		/*Bloc b = new BlocTree(300, 200);
-		background.add(b);
-	    b = new BlocTree(500, 200);
-		background.add(b);
-	    b = new BlocTree(50, 200);
-		background.add(b);
-	    b = new BlocTree(150, 0);
-		background.add(b);
-	    b = new BlocTree(450, 0);
-		background.add(b);
-	    b = new BlocTree(400, 400);
-		background.add(b);
-	    b = new BlocTree(200, 400);
-		background.add(b);
-	    b = new BlocTree(100, 450);
-		background.add(b);*/
 	}
 	@Override
 	public Iterator iterator() {
@@ -345,7 +313,7 @@ public class Level implements Iterable<Car> {
 		//si il y a encore un level prochaine sinon on refait le dernier
 		if(level < Constantes.NB_LEVEL-1){
 			level++;
-			end =  true; //a décommenter pour avoir que 1 lvl
+//			end =  true; //a décommenter pour avoir que 1 lvl
 		}else
 			end = true;
 		flyEaten = false;
