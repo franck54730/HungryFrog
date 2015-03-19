@@ -6,7 +6,7 @@ public class Settings {
 	protected boolean pad;
 	
 	private Settings(){
-		sound = false;
+		sound = true;
 		pad = true;
 	}
 

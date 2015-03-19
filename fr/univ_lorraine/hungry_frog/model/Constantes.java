@@ -1,5 +1,7 @@
 package fr.univ_lorraine.hungry_frog.model;
 
+import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
+
 public class Constantes {
 	public static final String TEXTURE_MENU = "menu.png";
 	public static final String TEXTURE_GAME_OVER = "game_over.png";
@@ -153,4 +155,23 @@ public class Constantes {
 	public static final int VITESSE_NORMAL = 80;
 	public static final int VITESSE_RAPIDE = 100;
 	public static final int VITESSE_TRES_RAPIDE = 120;
+	
+	public static DIRECTION getDirectionForCompass(float pitch, float roll) {
+		DIRECTION rep = DIRECTION.STOP;
+		int max = 15;
+		if(Math.abs(pitch)>Math.abs(roll)){
+			if(pitch>max){
+				rep = DIRECTION.LEFT;
+			}else if(pitch<-max){
+				rep = DIRECTION.RIGHT;
+			}
+		}else{
+			if(roll>max){
+				rep = DIRECTION.UP;
+			}else if(roll<-max){
+				rep = DIRECTION.DOWN;
+			}
+		}
+		return rep;
+	}
 }

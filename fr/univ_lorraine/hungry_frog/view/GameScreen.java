@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Peripheral;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -25,6 +27,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 
 import fr.univ_lorraine.hungry_frog.controller.GameListener;
 import fr.univ_lorraine.hungry_frog.model.Constantes;
+import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 import fr.univ_lorraine.hungry_frog.model.Fly;
 import fr.univ_lorraine.hungry_frog.model.Frog;
 import fr.univ_lorraine.hungry_frog.model.Level;
@@ -47,7 +50,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	Sound collisionCar;
 	Sound collisionWater;
 	Sound collisionTree;
-	Sound fond;
+	Music fond;
 	Sound life;
 	boolean start = false;
 	OrthographicCamera camera;
@@ -60,7 +63,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	public GameScreen(HungryFrogGame g){
 		hearth = new Texture(Constantes.TEXTURE_HEARTH);
 		game = g;
-		fond = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_FOND));
+		fond = Gdx.audio.newMusic(Gdx.files.internal(Constantes.SON_FOND));
 		collisionCar = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_CAR));
 		collisionWater = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_WATER));
 		collisionTree = Gdx.audio.newSound(Gdx.files.internal(Constantes.SON_COLLISION_TREE));
@@ -93,16 +96,30 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	public void show(){
 		batch = new SpriteBatch();
 		start();
-		if(Settings.getInstance().isSound())		
-			fond.loop(0.2f);
 		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 
 	@Override
 	public void render(float delta) {
+    	if(Settings.getInstance().isSound())
+			if(!fond.isPlaying())
+				fond.play();
 	    camera.update();
 	    batch.setProjectionMatrix(camera.combined);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		//si on utilise l'accelerometre on met a jour la direction de la frog
+		if(!Settings.getInstance().isPad()){
+			float pitch = 0;
+			float roll = 0;
+		  	if(Gdx.input.isPeripheralAvailable(Peripheral.Compass)){
+		  		pitch = Gdx.input.getPitch();
+		  		roll = Gdx.input.getRoll();
+				System.out.println("pitch : "+pitch+" roll : "+roll);
+		  		level.getFrog().setDirection(Constantes.getDirectionForCompass(pitch, roll));
+			 }else{
+				 level.getFrog().setDirection(DIRECTION.STOP);
+			 }
+		}
 		batch.begin();
 		batch.draw(level.getBackground(),0,0);
 		Frog frog = level.getFrog();
