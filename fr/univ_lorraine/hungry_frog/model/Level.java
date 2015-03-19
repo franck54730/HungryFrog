@@ -29,7 +29,7 @@ public class Level implements Iterable<Car> {
 	protected int level = 0;
 	protected Frog frog;
 	protected Fly fly;
-	protected int life = 5;
+	protected int life = 3;
 	protected boolean end = false;
 	protected Texture background;
 	
@@ -345,7 +345,7 @@ public class Level implements Iterable<Car> {
 		//si il y a encore un level prochaine sinon on refait le dernier
 		if(level < Constantes.NB_LEVEL-1){
 			level++;
-//			end =  true; //a décommenter pour avoir que 1 lvl
+			end =  true; //a décommenter pour avoir que 1 lvl
 		}else
 			end = true;
 		flyEaten = false;

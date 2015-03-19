@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.FPSLogger;
 
 public class HungryFrogGame extends Game {
 	private GameScreen animscreen;
-	protected MenuScreen menuscreen;
+	private MenuScreen menuscreen;
 	protected EndScreen endscreen;
 	protected GameOverScreen gameoverscreen;
 	protected FPSLogger logger;
@@ -15,11 +15,11 @@ public class HungryFrogGame extends Game {
 	public void create () {
 		logger = new FPSLogger();
 		setAnimscreen(new GameScreen(this));	
-		menuscreen = new MenuScreen(this);
+		setMenuscreen(new MenuScreen(this));
 		endscreen = new EndScreen(this);
 		gameoverscreen = new GameOverScreen(this);
 		//setGameScreen();
-		setScreen(menuscreen);	
+		setScreen(getMenuscreen());	
 	}
 	
 	@Override
@@ -34,6 +34,22 @@ public class HungryFrogGame extends Game {
 
 	public void setAnimscreen(GameScreen animscreen) {
 		this.animscreen = animscreen;
+	}
+
+	public MenuScreen getMenuscreen() {
+		return menuscreen;
+	}
+
+	public void setMenuscreen(MenuScreen menuscreen) {
+		this.menuscreen = menuscreen;
+	}
+	
+	public void restart(){
+		setAnimscreen(new GameScreen(this));	
+		setMenuscreen(new MenuScreen(this));
+		endscreen = new EndScreen(this);
+		gameoverscreen = new GameOverScreen(this);
+		setScreen(menuscreen);
 	}
 }
 

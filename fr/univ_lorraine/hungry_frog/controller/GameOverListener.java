@@ -12,17 +12,18 @@ import fr.univ_lorraine.hungry_frog.model.Pad;
 import fr.univ_lorraine.hungry_frog.view.HungryFrogGame;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonPlay;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonQuit;
+import fr.univ_lorraine.hungry_frog.view.button.ButtonReplay;
 
-public class MenuListener implements InputProcessor {
+public class GameOverListener implements InputProcessor {
 
-	protected ButtonPlay btPlay;
+	protected ButtonReplay btReplay;
 	protected ButtonQuit btQuit;
-	protected static enum SELECTION { NONE, QUIT, PLAY };
+	protected static enum SELECTION { NONE, QUIT, REPLAY };
 	protected SELECTION selection;
 	protected HungryFrogGame hungryfrog;
 	
-	public MenuListener(ButtonPlay b1, ButtonQuit b2, HungryFrogGame h){
-		btPlay = b1;
+	public GameOverListener(ButtonReplay b1, ButtonQuit b2, HungryFrogGame h){
+		btReplay = b1;
 		btQuit = b2;
 		selection = SELECTION.NONE;
 		hungryfrog = h;
@@ -63,9 +64,9 @@ public class MenuListener implements InputProcessor {
 			//transformation des coordonnées au repere 500
 			screenX = screenX*500/h;
 			screenY = screenY*500/h;
-			if(btPlay.isIn(screenX, screenY)){
-				btPlay.click();
-				selection = SELECTION.PLAY;
+			if(btReplay.isIn(screenX, screenY)){
+				btReplay.click();
+				selection = SELECTION.REPLAY;
 			} else if(btQuit.isIn(screenX, screenY)){
 				btQuit.click();
 				selection = SELECTION.QUIT;
@@ -78,8 +79,8 @@ public class MenuListener implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		switch (selection) {
-		case PLAY:
-			hungryfrog.setScreen(hungryfrog.getAnimscreen());
+		case REPLAY:
+			hungryfrog.restart();
 			break;
 		case QUIT:
 			System.exit(0);

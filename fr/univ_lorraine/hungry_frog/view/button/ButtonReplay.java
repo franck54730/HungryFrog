@@ -7,7 +7,7 @@ import fr.univ_lorraine.hungry_frog.model.Constantes;
 public class ButtonReplay extends Button {
 
 	public ButtonReplay(int x, int y) {
-		super(70, 150, 175, 42);
+		super(70, 150, x, y);
 		// TODO Stub du constructeur généré automatiquement
 		texture1 = new Texture(Constantes.TEXTURE_BT_REPLAY_1);
 		texture2 = new Texture(Constantes.TEXTURE_BT_REPLAY_2);

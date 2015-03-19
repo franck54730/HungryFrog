@@ -86,13 +86,13 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	
 	public void start(){
 		start=true;
-		fond.loop(0.2f);
 	}
 	
 	@Override
 	public void show(){
 		batch = new SpriteBatch();
 		start();		
+		fond.loop(0.2f);
 		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 
@@ -209,7 +209,7 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 
 	@Override
 	public void hide() {
-		fond.pause();
+		fond.dispose();
 	}
 
 	@Override

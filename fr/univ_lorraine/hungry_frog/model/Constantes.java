@@ -33,7 +33,7 @@ public class Constantes {
 	public static final String SON_FOND = "fond.wav";
 	public static final String SON_LIFE = "life.wav";
 	public static final String SON_WIN = "win.wav";
-	public static final String SON_GAME_OVER = "fond.wav";
+	public static final String SON_GAME_OVER = "game_over.wav";
 	
 	public static final int BLOC_DIMENSION = 50;
 	
