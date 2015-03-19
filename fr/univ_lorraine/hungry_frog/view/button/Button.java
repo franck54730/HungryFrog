@@ -30,7 +30,7 @@ public abstract class Button {
 	}
 	
 	public void click(){
-		clicked = true;
+		clicked = !clicked;
 	}
 	
 	public boolean isIn(int cx, int cy){
@@ -67,5 +67,9 @@ public abstract class Button {
 
 	public void setY(int y) {
 		this.y = y;
+	}
+
+	public void initialize() {
+		clicked = false;
 	}
 }

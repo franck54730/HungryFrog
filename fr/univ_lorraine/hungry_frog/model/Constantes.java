@@ -1,7 +1,7 @@
 package fr.univ_lorraine.hungry_frog.model;
 
 public class Constantes {
-	public static final String TEXTURE_ACCEUIL = "acceuil.png";
+	public static final String TEXTURE_MENU = "menu.png";
 	public static final String TEXTURE_GAME_OVER = "game_over.png";
 	public static final String TEXTURE_END = "end.png";
 	public static final String TEXTURE_HEARTH = "hearth.png";
@@ -25,12 +25,20 @@ public class Constantes {
 	public static final String TEXTURE_BT_REPLAY_2 = "button_replay_2.png";
 	public static final String TEXTURE_BT_QUIT_1 = "button_quit_1.png";
 	public static final String TEXTURE_BT_QUIT_2 = "button_quit_2.png";
+	public static final String TEXTURE_BT_SETTINGS_1 = "button_settings_1.png";
+	public static final String TEXTURE_BT_SETTINGS_2 = "button_settings_2.png";
+	public static final String TEXTURE_BT_RETURN_1 = "button_return_1.png";
+	public static final String TEXTURE_BT_RETURN_2 = "button_return_2.png";
+	public static final String TEXTURE_SETTINGS = "settings.png";
+	public static final String TEXTURE_CBOX_1 = "checkbox_1.png";
+	public static final String TEXTURE_CBOX_2 = "checkbox_2.png";
 	
 	public static final String SON_COLLISION_CAR = "collision_car.wav";
 	public static final String SON_COLLISION_WATER = "collision_water.wav";
 	public static final String SON_COLLISION_TREE = "collision_tree.wav";
 	public static final String SON_THEME = "theme.wav";
 	public static final String SON_FOND = "fond.wav";
+	public static final String SON_SETTINGS = "settings.wav";
 	public static final String SON_LIFE = "life.wav";
 	public static final String SON_WIN = "win.wav";
 	public static final String SON_GAME_OVER = "game_over.wav";

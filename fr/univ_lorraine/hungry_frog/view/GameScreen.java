@@ -29,6 +29,7 @@ import fr.univ_lorraine.hungry_frog.model.Fly;
 import fr.univ_lorraine.hungry_frog.model.Frog;
 import fr.univ_lorraine.hungry_frog.model.Level;
 import fr.univ_lorraine.hungry_frog.model.Pad;
+import fr.univ_lorraine.hungry_frog.model.Settings;
 import fr.univ_lorraine.hungry_frog.model.Tree;
 import fr.univ_lorraine.hungry_frog.model.beech.Beech;
 import fr.univ_lorraine.hungry_frog.model.car.Car;
@@ -91,8 +92,9 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 	@Override
 	public void show(){
 		batch = new SpriteBatch();
-		start();		
-		fond.loop(0.2f);
+		start();
+		if(Settings.getInstance().isSound())		
+			fond.loop(0.2f);
 		Gdx.input.setInputProcessor(new GameListener(level,pad));
 	}
 
@@ -117,7 +119,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				fly.updateTemplate();
 				fly.updateHitboxs();
 				if(frog.hasCollision(fly)){
-					life.play(0.5f);
+					if(Settings.getInstance().isSound())
+						life.play(0.5f);
 					level.eatFly();
 				}
 			}
@@ -126,7 +129,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				c.updateTemplate();
 				c.updateHitboxs();
 				if(frog.hasCollision(c)){
-					collisionCar.play(1f);
+					if(Settings.getInstance().isSound())
+						collisionCar.play(1f);
 					level.hitCar();
 					frog.updateHitboxs();
 					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
@@ -138,8 +142,9 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 				t.update(delta);
 				t.updateTemplate();
 				t.updateHitboxs();
-				if(frog.hasCollision(t)){
-					collisionTree.play(1f);
+				if(frog.hasCollision(t)){	
+					if(Settings.getInstance().isSound())
+						collisionTree.play(1f);
 					level.hitTree();
 					frog.updateHitboxs();
 					batch.draw(frog.getTexture(), frog.getX(), frog.getY());
@@ -161,7 +166,8 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			// si la grenouille est dans l'eau
 			if(Constantes.RIVER_START < frog.getY() && frog.getY() < Constantes.RIVER_END ){
 				if(!frog.isOnBeech()){
-					collisionWater.play(1f);
+					if(Settings.getInstance().isSound())
+						collisionWater.play(1f);
 					level.hitCar();
 					frog.updateHitboxs();
 				}
@@ -189,9 +195,9 @@ public class GameScreen extends ApplicationAdapter implements Screen{
 			batch.draw(pad.getTexture(), pad.getX(), pad.getY(), pad.getWidth(), pad.getWidth());
 		}
 		if(level.isLoose())
-			game.setScreen(game.gameoverscreen);
+			game.setScreen(game.gameoverScreen);
 		else if(level.isEnd())
-			game.setScreen(game.endscreen);
+			game.setScreen(game.endScreen);
 		batch.end();
 	}
 

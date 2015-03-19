@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import fr.univ_lorraine.hungry_frog.controller.EndListener;
 import fr.univ_lorraine.hungry_frog.controller.MenuListener;
 import fr.univ_lorraine.hungry_frog.model.Constantes;
+import fr.univ_lorraine.hungry_frog.model.Settings;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonPlay;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonQuit;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonReplay;
@@ -47,7 +48,8 @@ public class EndScreen extends ScreenAdapter{
 	
 	public void start(){
 		start=true;
-		fond.play(0.2f);
+		if(Settings.getInstance().isSound())
+			fond.play(0.2f);
 	}
 
 	@Override

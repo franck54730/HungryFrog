@@ -2,24 +2,26 @@ package fr.univ_lorraine.hungry_frog.view;
 
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 
 public class HungryFrogGame extends Game {
-	private GameScreen animscreen;
-	private MenuScreen menuscreen;
-	protected EndScreen endscreen;
-	protected GameOverScreen gameoverscreen;
+	protected GameScreen gameScreen;
+	protected MenuScreen menuScreen;
+	protected EndScreen endScreen;
+	protected GameOverScreen gameoverScreen;
+	protected SettingsScreen settingsScreen;
 	protected FPSLogger logger;
 	
 	@Override
 	public void create () {
 		logger = new FPSLogger();
-		setAnimscreen(new GameScreen(this));	
-		setMenuscreen(new MenuScreen(this));
-		endscreen = new EndScreen(this);
-		gameoverscreen = new GameOverScreen(this);
-		//setGameScreen();
-		setScreen(getMenuscreen());	
+		gameScreen = new GameScreen(this);	
+		menuScreen = new MenuScreen(this);
+		endScreen = new EndScreen(this);
+		gameoverScreen = new GameOverScreen(this);
+		settingsScreen = new SettingsScreen(this);
+		setScreen(menuScreen);	
 	}
 	
 	@Override
@@ -28,28 +30,37 @@ public class HungryFrogGame extends Game {
 		//logger.log();
 	}
 
-	public GameScreen getAnimscreen() {
-		return animscreen;
+	public GameScreen getGameScreen() {
+		return gameScreen;
 	}
 
-	public void setAnimscreen(GameScreen animscreen) {
-		this.animscreen = animscreen;
+	public void setGameScreen(GameScreen gameScreen) {
+		this.gameScreen = gameScreen;
 	}
 
-	public MenuScreen getMenuscreen() {
-		return menuscreen;
+	public MenuScreen getMenuScreen() {
+		return menuScreen;
 	}
 
-	public void setMenuscreen(MenuScreen menuscreen) {
-		this.menuscreen = menuscreen;
+	public void setMenuScreen(MenuScreen menuScreen) {
+		this.menuScreen = menuScreen;
 	}
 	
 	public void restart(){
-		setAnimscreen(new GameScreen(this));	
-		setMenuscreen(new MenuScreen(this));
-		endscreen = new EndScreen(this);
-		gameoverscreen = new GameOverScreen(this);
-		setScreen(menuscreen);
+		gameScreen = new GameScreen(this);	
+		menuScreen = new MenuScreen(this);
+		endScreen = new EndScreen(this);
+		gameoverScreen = new GameOverScreen(this);
+		settingsScreen = new SettingsScreen(this);
+		setScreen(menuScreen);
+	}
+
+	public Screen getSettingsScreen() {
+		return settingsScreen;
+	}
+
+	public void setSettingsScreen(SettingsScreen settingsScreen) {
+		this.settingsScreen = settingsScreen;
 	}
 }
 

@@ -9,26 +9,33 @@ import fr.univ_lorraine.hungry_frog.model.Constantes;
 import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 import fr.univ_lorraine.hungry_frog.model.Level;
 import fr.univ_lorraine.hungry_frog.model.Pad;
+import fr.univ_lorraine.hungry_frog.model.Settings;
 import fr.univ_lorraine.hungry_frog.view.HungryFrogGame;
+import fr.univ_lorraine.hungry_frog.view.button.ButtonReturn;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonSettings;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonPlay;
 import fr.univ_lorraine.hungry_frog.view.button.ButtonQuit;
+import fr.univ_lorraine.hungry_frog.view.button.CheckBox;
 
-public class MenuListener implements InputProcessor {
+public class SettingsListener implements InputProcessor {
 
-	protected ButtonPlay btPlay;
-	protected ButtonQuit btQuit;
-	protected ButtonSettings btOptions;
-	protected static enum SELECTION { NONE, QUIT, PLAY, OPTIONS };
+	protected ButtonReturn btReturn;
+	protected CheckBox boxSound;
+	protected CheckBox boxPad;
+	protected CheckBox boxAccelerometre;
+	protected static enum SELECTION { NONE, SOUND, RETURN, PAD, ACCELEROMETRE};
 	protected SELECTION selection;
 	protected HungryFrogGame hungryfrog;
+	protected Settings settings;
 	
-	public MenuListener(ButtonPlay b1, ButtonQuit b2, ButtonSettings b3, HungryFrogGame h){
-		btPlay = b1;
-		btQuit = b2;
-		btOptions = b3;
+	public SettingsListener(ButtonReturn b1, CheckBox b2, CheckBox b3, CheckBox b4, HungryFrogGame h) {
+		btReturn = b1;
+		boxSound = b2;
+		boxPad = b3;
+		boxAccelerometre = b4;
 		selection = SELECTION.NONE;
 		hungryfrog = h;
+		settings = Settings.getInstance();
 	}
 
 
@@ -66,15 +73,20 @@ public class MenuListener implements InputProcessor {
 			//transformation des coordonnées au repere 500
 			screenX = screenX*500/h;
 			screenY = screenY*500/h;
-			if(btPlay.isIn(screenX, screenY)){
-				btPlay.click();
-				selection = SELECTION.PLAY;
-			} else if(btQuit.isIn(screenX, screenY)){
-				btQuit.click();
-				selection = SELECTION.QUIT;
-			} else if(btOptions.isIn(screenX, screenY)){
-				btOptions.click();
-				selection = SELECTION.OPTIONS;
+			if(btReturn.isIn(screenX, screenY)){
+				btReturn.click();
+				selection = SELECTION.RETURN;
+			} else if(boxSound.isIn(screenX, screenY)){
+				boxSound.click();
+				selection = SELECTION.SOUND;
+			} else if(boxPad.isIn(screenX, screenY)){
+				boxPad.click();
+				boxAccelerometre.click();
+				selection = SELECTION.PAD;
+			} else if(boxAccelerometre.isIn(screenX, screenY)){
+				boxPad.click();
+				boxAccelerometre.click();
+				selection = SELECTION.ACCELEROMETRE;
 			}
 		}
 		return selection != SELECTION.NONE;
@@ -84,14 +96,17 @@ public class MenuListener implements InputProcessor {
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		switch (selection) {
-		case PLAY:
-			hungryfrog.setScreen(hungryfrog.getGameScreen());
+		case RETURN:
+			hungryfrog.setScreen(hungryfrog.getMenuScreen());
 			break;
-		case OPTIONS:
-			hungryfrog.setScreen(hungryfrog.getSettingsScreen());
+		case SOUND:
+			settings.changeSound();
 			break;
-		case QUIT:
-			System.exit(0);
+		case PAD:
+			settings.changePad();
+			break;
+		case ACCELEROMETRE:
+			settings.changePad();
 			break;
 		}
 		return false;

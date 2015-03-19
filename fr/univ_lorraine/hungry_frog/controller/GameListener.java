@@ -9,6 +9,7 @@ import fr.univ_lorraine.hungry_frog.model.Constantes;
 import fr.univ_lorraine.hungry_frog.model.Constantes.DIRECTION;
 import fr.univ_lorraine.hungry_frog.model.Level;
 import fr.univ_lorraine.hungry_frog.model.Pad;
+import fr.univ_lorraine.hungry_frog.model.Settings;
 
 public class GameListener implements InputProcessor {
 
@@ -51,6 +52,7 @@ public class GameListener implements InputProcessor {
 		return false;
 	}
 	
+	/* permet de rediriger la grenouille */
 	public void redirection(){
 		if(Gdx.input.isKeyPressed(Keys.DPAD_LEFT))
 			 level.getFrog().setDirection(Constantes.DIRECTION.LEFT);
@@ -70,24 +72,28 @@ public class GameListener implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		pad.setPosition(screenX, screenY);
-		pad.show();
+		if(Settings.getInstance().isPad()){
+			pad.setPosition(screenX, screenY);
+			pad.show();
+		}
 		return false;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		// TODO Stub de la méthode généré automatiquement
-		pad.hide();
-		level.getFrog().setDirection(DIRECTION.STOP);
+		if(Settings.getInstance().isPad()){
+			pad.hide();
+			level.getFrog().setDirection(DIRECTION.STOP);
+		}
 		return false;
 	}
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		pad.update(screenX,screenY);
-		level.getFrog().setDirection(pad.getDirection());
-		// TODO Stub de la méthode généré automatiquement
+		if(Settings.getInstance().isPad()){
+			pad.update(screenX,screenY);
+			level.getFrog().setDirection(pad.getDirection());
+		}
 		return false;
 	}
 
